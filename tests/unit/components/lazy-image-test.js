@@ -4,93 +4,47 @@ import {
   test
 } from 'ember-qunit';
 
-var get = Ember.get;
-
-var errorMessageSelector   = '.lazy-image-error-message';
-var loadingMessageSelector = '.lazy-image-loading';
-var errorImageSelector     = '.lazy-image-error';
-
 moduleForComponent('lazy-image', 'LazyImageComponent');
 
+var get = Ember.get;
+
+var imageSelector          = '.lazy-image';
+var placeholderSelector    = '.lazy-image-placeholder';
+var imageContainerSelector = '.lazy-image-container';
+
 test('it has correct defaults', function() {
-  expect(5);
+  expect(2);
 
   var component = this.subject();
 
-  equal(get(component, 'defaultLoadingText'), 'Loading');
-  equal(get(component, 'defaultErrorText'),   'Image failed to load');
-  equal(get(component, 'defaultErrorUrl'),    null);
-  equal(get(component, 'loaded'), false);
+  equal(get(component, 'lazyUrl'),     null);
   equal(get(component, 'errorThrown'), false);
 });
 
-test('it renders default loading message', function() {
-  expect(2);
+test('it renders default placeholder', function() {
+  expect(1);
 
   var component = this.subject();
 
   this.append();
 
-  ok(component.$(loadingMessageSelector).length > 0, 'loading message is correctly rendered');
-  ok(component.$(loadingMessageSelector + ':contains("' + 'Loading' + '")'), 'default loading message is rendered correctly');
+  ok(component.$(placeholderSelector).length > 0, 'placeholder is correctly rendered');
 });
 
-test('it renders custom loading message', function() {
-  expect(2);
-
-  var message = 'BOOOOZ';
+test('it replaces placeholder with an actual image on click event', function() {
+  expect(4);
 
   var component = this.subject({
-    loadingText: message
+    url: 'foo.jpg'
   });
 
   this.append();
 
-  ok(component.$(loadingMessageSelector).length > 0, 'loading message is correctly rendered');
-  ok(component.$(loadingMessageSelector + ':contains("' + 'Loading' + '")'), 'default loading message is rendered correctly');
-});
+  ok(component.$(placeholderSelector).length > 0, 'placeholder is correctly rendered');
 
-test('it renders default error message if image fails to load', function() {
-  expect(2);
+  component.$().click();
 
-  var component = this.subject();
-
-  component._imageError();
-
-  this.append();
-
-  ok(component.$(errorMessageSelector).length > 0, 'error message is correctly rendered');
-  ok(component.$(errorMessageSelector + ':contains("' + 'Image failed to load' + '")'), 'default error message is rendered correctly');
-});
-
-test('it renders custom error message if image fails to load', function() {
-  expect(2);
-
-  var message = 'FOO BAAAAZ';
-
-  var component = this.subject({
-    errorText: message
-  });
-
-  component._imageError();
-
-  this.append();
-
-  ok(component.$(errorMessageSelector).length > 0, 'error message is correctly rendered');
-  ok(component.$(errorMessageSelector + ':contains("' + message  + '")'), 'default error message is rendered correctly');
-});
-
-test('it renders custom error image if image fails to load', function() {
-  expect(2);
-
-  var component = this.subject({
-    errorUrl: 'error.jpg'
-  });
-
-  component._imageError();
-
-  this.append();
-
-  ok(component.$(errorImageSelector).length > 0, 'error image exists');
-  equal(component.$(errorImageSelector).attr('src'), 'error.jpg', 'error image url is correct');
+  ok(component.$().hasClass('lazy-loaded'), 'placeholder is hidden');
+  ok(component.$(imageSelector).length > 0, 'image is correctly rendered');
+  equal(component.$(imageSelector).attr('src'), 'foo.jpg', 'src attribute is correct');
 });

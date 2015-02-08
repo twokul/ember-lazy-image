@@ -1,25 +1,25 @@
-.lazy-image-container {
+.await-image-container, .lazy-image-container {
   position: relative;
 }
 
-.lazy-image-container img {
+.await-image-container img {
   z-index: 0;
   opacity: 0;
 }
 
-.lazy-image-container.loaded img {
+.await-image-container.loaded img {
   opacity: 1;
 }
 
-.lazy-image-container.error-thrown .lazy-image-loading {
+.await-image-container.error-thrown .await-image-loading {
   display: none;
 }
 
-.lazy-image-container.loaded .lazy-image-loading {
+.await-image-container.loaded .await-image-loading {
   display: none;
 }
 
-.lazy-image-error-message, .lazy-image-loading {
+.await-image-error-message, .await-image-loading {
   position: absolute;
   top: 50%;
   right: 50%;
@@ -83,4 +83,14 @@
   100% {
     opacity: 1;
   }
+}
+
+.lazy-image-container.lazy-loaded .lazy-image-placeholder {
+  display: none;
+}
+
+.lazy-image-placeholder {
+  position: absolute;
+  top: 50%;
+  right: 33%;
 }
