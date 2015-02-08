@@ -1,0 +1,15 @@
+{{#if template}}
+  <div class="lazy-image-loading">{{yield}}</div>
+{{else}}
+  <div class="lazy-image-loading">
+    {{defaultLoadingText}}<span class="one">.</span><span class="two">.</span><span class="three">.</span>
+  </div>
+{{/if}}
+{{#if errorThrown}}
+  {{#if defaultErrorUrl}}
+    <img class="lazy-image-error" {{bind-attr src=defaultErrorUrl}} />
+  {{else}}
+    <div class="lazy-image-error-message">{{defaultErrorText}}</div>
+  {{/if}}
+{{/if}}
+<img class="lazy-image" {{bind-attr src=url}} />
