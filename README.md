@@ -1,5 +1,7 @@
 # Ember-lazy-image
 
+[![Build Status](https://travis-ci.org/twokul/ember-lazy-image.svg)](https://travis-ci.org/twokul/ember-lazy-image)
+
 This README outlines the details of collaborating on this Ember addon.
 
 ## Installation
