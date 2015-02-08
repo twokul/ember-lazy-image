@@ -13,12 +13,11 @@ var placeholderSelector    = '.lazy-image-placeholder';
 var imageContainerSelector = '.lazy-image-container';
 
 test('it has correct defaults', function() {
-  expect(2);
+  expect(1);
 
   var component = this.subject();
 
-  equal(get(component, 'lazyUrl'),     null);
-  equal(get(component, 'errorThrown'), false);
+  equal(get(component, 'lazyUrl'), null);
 });
 
 test('it renders default placeholder', function() {
