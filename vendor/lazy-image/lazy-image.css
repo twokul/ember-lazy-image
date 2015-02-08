@@ -1,25 +1,32 @@
-.await-image-container, .lazy-image-container {
+.lazy-image-container {
   position: relative;
+  min-height: 200px;
 }
 
-.await-image-container img {
+.lazy-image-container img {
   z-index: 0;
   opacity: 0;
 }
 
-.await-image-container.loaded img {
+.lazy-image-container.loaded img {
   opacity: 1;
 }
 
-.await-image-container.error-thrown .await-image-loading {
+.lazy-image-error-message {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+}
+
+.lazy-image-container.loaded .lazy-image-error-message {
   display: none;
 }
 
-.await-image-container.loaded .await-image-loading {
+.lazy-image-container.loaded .lazy-image-placeholder {
   display: none;
 }
 
-.await-image-error-message, .await-image-loading {
+.lazy-image-placeholder {
   position: absolute;
   top: 50%;
   right: 50%;
@@ -83,14 +90,4 @@
   100% {
     opacity: 1;
   }
-}
-
-.lazy-image-container.lazy-loaded .lazy-image-placeholder {
-  display: none;
-}
-
-.lazy-image-placeholder {
-  position: absolute;
-  top: 50%;
-  right: 33%;
 }

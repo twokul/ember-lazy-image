@@ -10,14 +10,18 @@ var get = Ember.get;
 
 var imageSelector          = '.lazy-image';
 var placeholderSelector    = '.lazy-image-placeholder';
+var errorMessageSelector   = '.lazy-image-error-message';
 var imageContainerSelector = '.lazy-image-container';
 
 test('it has correct defaults', function() {
-  expect(1);
+  expect(4);
 
   var component = this.subject();
 
-  equal(get(component, 'lazyUrl'), null);
+  equal(get(component, 'loaded'),           false);
+  equal(get(component, 'errorThrown'),      false);
+  equal(get(component, 'lazyUrl'),          null);
+  equal(get(component, 'defaultErrorText'), 'Image failed to load');
 });
 
 test('it renders default placeholder', function() {
@@ -30,20 +34,15 @@ test('it renders default placeholder', function() {
   ok(component.$(placeholderSelector).length > 0, 'placeholder is correctly rendered');
 });
 
-test('it replaces placeholder with an actual image on click event', function() {
-  expect(4);
+test('it renders default error message if image fails to load', function() {
+  expect(2);
 
-  var component = this.subject({
-    url: 'foo.jpg'
-  });
+  var component = this.subject();
+
+  component._imageError();
 
   this.append();
 
-  ok(component.$(placeholderSelector).length > 0, 'placeholder is correctly rendered');
-
-  component.$().click();
-
-  ok(component.$().hasClass('lazy-loaded'), 'placeholder is hidden');
-  ok(component.$(imageSelector).length > 0, 'image is correctly rendered');
-  equal(component.$(imageSelector).attr('src'), 'foo.jpg', 'src attribute is correct');
+  ok(component.$(errorMessageSelector).length > 0, 'error message is correctly rendered');
+  ok(component.$(errorMessageSelector + ':contains("' + 'Image failed to load' + '")'), 'default error message is rendered correctly');
 });

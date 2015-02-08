@@ -1,30 +1,20 @@
 import Ember from 'ember';
 
 var on             = Ember.on;
-var run            = Ember.run;
 var set            = Ember.set;
+var run            = Ember.run;
+var Mixin          = Ember.Mixin;
 var computed       = Ember.computed;
-var Component      = Ember.Component;
 var getWithDefault = Ember.getWithDefault;
 
-export default Component.extend({
+export default Mixin.create({
   loaded:      false,
   errorThrown: false,
 
-  classNames: ['await-image-container'],
-
   classNameBindings: ['loaded', 'errorThrown'],
-
-  defaultErrorUrl: computed('errorUrl', function() {
-    return getWithDefault(this, 'errorUrl', null);
-  }),
 
   defaultErrorText: computed('errorText', function() {
     return getWithDefault(this, 'errorText', 'Image failed to load');
-  }),
-
-  defaultLoadingText: computed('loadingText', function() {
-    return getWithDefault(this, 'loadingText', 'Loading');
   }),
 
   _resolveImage: on('didInsertElement', function() {

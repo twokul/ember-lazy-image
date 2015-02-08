@@ -4,6 +4,8 @@
 
 `ember-lazy-image` is a component that allows you to gracefully handle image loading (both eager and lazy).
 
+Default loading svg is stolen from [aurer](https://github.com/aurer) and his awesome [codepen](http://codepen.io/aurer/pen/jEGbA).
+
 ### Usage
 
 ```sh

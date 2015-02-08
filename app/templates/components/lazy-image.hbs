@@ -2,41 +2,25 @@
   <div class="lazy-image-placeholder">{{yield}}</div>
 {{else}}
   <div class="lazy-image-placeholder">
-    <svg xmlns="http://www.w3.org/2000/svg"
-         xmlns:xlink="http://www.w3.org/1999/xlink"
-         version="1.1"
-         x="0px"
-         y="0px"
-         width="140px"
-         height="140px"
-         viewBox="0 0 140 140"
-         enable-background="new 0 0 140 140"
-         xml:space="preserve">
-      <g>
-        <rect y="-0.277" fill="#E0E0E0" width="140" height="140.277"/>
-        <g opacity="0">
-          <polyline fill="none" stroke="#DBDBDB" stroke-width="2.002" stroke-miterlimit="10" points="140,136.496 140,140 136.496,140       "/>
-          <line fill="none" stroke="#DBDBDB" stroke-width="2.002" stroke-miterlimit="10" stroke-dasharray="6.9996,6.9996" x1="129.497" y1="140" x2="7.003" y2="140"/>
-          <polyline fill="none" stroke="#DBDBDB" stroke-width="2.002" stroke-miterlimit="10" points="3.503,140 0,140 0,136.496   "/>
-          <line fill="none" stroke="#DBDBDB" stroke-width="2.002" stroke-miterlimit="10" stroke-dasharray="7.0142,7.0142" x1="0" y1="129.482" x2="0" y2="6.734"/>
-          <polyline fill="none" stroke="#DBDBDB" stroke-width="2.002" stroke-miterlimit="10" points="0,3.227 0,-0.277 3.503,-0.277   "/>
-          <line fill="none" stroke="#DBDBDB" stroke-width="2.002" stroke-miterlimit="10" stroke-dasharray="6.9996,6.9996" x1="10.503" y1="-0.277" x2="132.997" y2="-0.277"/>
-          <polyline fill="none" stroke="#DBDBDB" stroke-width="2.002" stroke-miterlimit="10" points="136.496,-0.277 140,-0.277     140,3.227   "/>
-          <line fill="none" stroke="#DBDBDB" stroke-width="2.002" stroke-miterlimit="10" stroke-dasharray="7.0142,7.0142" x1="140" y1="10.241" x2="140" y2="132.989"/>
-        </g>
-      </g>
-      <g>
-        <line fill="none" stroke="#C2C2C2" stroke-width="1.9555" stroke-miterlimit="10" x1="11.333" y1="128.39" x2="128.666" y2="11.057"/>
-        <line fill="none" stroke="#C2C2C2" stroke-width="1.9555" stroke-miterlimit="10" x1="11.333" y1="11.057" x2="128.666" y2="128.39"/>
-      </g>
+    <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+    <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+      s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+      c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+    <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+      C22.32,8.481,24.301,9.057,26.013,10.047z">
+      <animateTransform attributeType="xml"
+        attributeName="transform"
+        type="rotate"
+        from="0 20 20"
+        to="360 20 20"
+        dur="0.5s"
+        repeatCount="indefinite"/>
+      </path>
     </svg>
   </div>
 {{/if}}
 {{#if errorThrown}}
-  {{#if defaultErrorUrl}}
-    <img class="lazy-image-error" {{bind-attr src=defaultErrorUrl}} />
-  {{else}}
-    <div class="lazy-image-error-message">{{defaultErrorText}}</div>
-  {{/if}}
+  <div class="lazy-image-error-message">{{defaultErrorText}}</div>
 {{/if}}
 <img class="lazy-image" {{bind-attr src=lazyUrl}} />
