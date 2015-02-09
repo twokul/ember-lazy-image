@@ -8,7 +8,7 @@ var observer  = Ember.observer;
 var Component = Ember.Component;
 
 export default Component.extend(InViewportMixin, ImageLoadMixin, {
-  lazyUrl: null,
+  lazyUrl: "//:0",
 
   classNames: ['lazy-image-container'],
 
@@ -16,7 +16,7 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, {
     var lazyUrl         = get(this, 'lazyUrl');
     var enteredViewport = get(this, 'enteredViewport');
 
-    if (enteredViewport && !lazyUrl) {
+    if (enteredViewport && lazyUrl === "//:0") {
       set(this, 'lazyUrl', get(this, 'url'));
     }
   }).on('didInsertElement')
