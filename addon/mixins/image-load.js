@@ -49,10 +49,5 @@ export default Mixin.create({
     run(function() {
       set(component, 'errorThrown', true);
     });
-  },
-
-  willDestroy: function() {
-    this.$('img').off('load');
-    this.$('img').off('error');
   }
 });
