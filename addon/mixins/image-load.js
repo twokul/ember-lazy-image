@@ -51,7 +51,7 @@ export default Mixin.create({
     });
   },
 
-  willDestroy: function() {
+  willDestroyElement: function() {
     this.$('img').off('load');
     this.$('img').off('error');
   }
