@@ -2,9 +2,12 @@
 
 [![Build Status](https://travis-ci.org/twokul/ember-lazy-image.svg)](https://travis-ci.org/twokul/ember-lazy-image)
 
-`ember-lazy-image` is a component that allows you to gracefully handle image loading (both eager and lazy).
+`ember-lazy-image` is a component that allows you to gracefully handle image loading.
 
-Default loading svg is stolen from [aurer](https://github.com/aurer) and his awesome [codepen](http://codepen.io/aurer/pen/jEGbA).
+Component will load images lazily, only if they appeared in the view port.
+This optimization brings page load time down.
+
+Default loading placeholder is stolen from [aurer](https://github.com/aurer) and his awesome [codepen](http://codepen.io/aurer/pen/jEGbA).
 
 ### Usage
 
@@ -12,28 +15,21 @@ Default loading svg is stolen from [aurer](https://github.com/aurer) and his awe
 npm install ember-lazy-image --save
 ```
 
-### await-image
-
-This component allows visual feedback while the image is loading (i.e. spinner, text, etc.).
+### lazy-image
 
 ```html
-{{await-image url='http://my-valid-url.com/foo.jpg'}}
+{{lazy-image url='http://my-valid-url.com/foo.jpg'}}
 ```
 
-Component will wait until the image is loaded and while waiting it will show `Loading...` text.
+Component will wait until the image is loaded and while waiting it will show default
+loading placeholder (seee above).
 
-You can customize `loading` text by passing it as an parameter:
-
-```html
-{{await-image url='http://my-valid-url.com/foo.jpg' loadingText='At least you are not on hold...'}}
-```
-
-Let's say you want to show the spinner or svg element while the image is loading:
+You can customize `loading` placeholder by passing it as an parameter:
 
 ```html
-{{#await-image url='http://my-valid-url.com/foo.jpg'}}
+{{#lazy-image url='http://my-valid-url.com/foo.jpg'}}
   <!-- custom template goes here, spinner, svg, etc. -->
-{{/await-image}}
+{{/lazy-image}}
 ```
 
 You can also define the fallback if the image failed to load. By default, component will render
@@ -42,31 +38,7 @@ You can also define the fallback if the image failed to load. By default, compon
 You can customize `error` text by passing it as an parameter:
 
 ```html
-{{await-image url='http://my-not-valid-url.com/foo.jpg' errorText='Something went wrong.'}}
-```
-
-Or can even define a fallback image to show:
-
-```html
-{{await-image url='http://my-not-valid-url.com/foo.jpg' errorUrl='http://my-valid-error-url.com/error.jpg'}}
-```
-
-### lazy-image
-
-This component allows to delay image loading. Actual image load happens when user clicks on the image placeholder.
-
-Markup below will render a default placeholder.
-
-```html
-{{lazy-image url='http://my-valid-url.com/foo.jpg'}}
-```
-
-If you want to use custom placeholder:
-
-```html
-{{#lazy-image url='http://my-valid-url.com/foo.jpg'}}
-  <!-- custom placeholder goes here -->
-{{/lazy-image}}
+{{lazy-image url='http://my-not-valid-url.com/foo.jpg' errorText='Something went wrong.'}}
 ```
 
 ## Installation
