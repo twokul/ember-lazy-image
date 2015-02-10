@@ -1,62 +1,58 @@
-.lazy-image-container {
+.lz-image {
   position: relative;
-  min-height: 200px;
 }
-
-.lazy-image-container img {
+.lz-image__img {
   z-index: 0;
   opacity: 0;
 }
-
-.lazy-image-container.loaded img {
+.lz-image_loaded .lz-image__img {
   opacity: 1;
 }
-
-.lazy-image-error-message {
+.lz-image__error-message {
   position: absolute;
   top: 50%;
   right: 50%;
 }
 
-.lazy-image-container.loaded .lazy-image-error-message {
-  display: none;
-}
-
-.lazy-image-container.loaded .lazy-image-placeholder {
-  display: none;
-}
-
-.lazy-image-placeholder {
+.lz-image__placeholder {
   position: absolute;
   top: 50%;
-  right: 50%;
+  left: 50%;
+  margin-top: -40px;
+  margin-left: -22.5px;
 }
 
-.one {
+.lz-image_loaded .lz-image__error-message {
+  display: none;
+}
+
+.lz-image_loaded .lz-image__placeholder {
+  display: none;
+}
+
+.lz-image__animation_one {
   opacity: 0;
-  -webkit-animation: dot 1.3s infinite;
+  -webkit-animation: lz-image__keyframes 1.3s infinite;
   -webkit-animation-delay: 0.0s;
-  animation: dot 1.3s infinite;
+  animation: lz-image__keyframes 1.3s infinite;
   animation-delay: 0.0s;
 }
-
-.two {
+.lz-image__animation_two {
   opacity: 0;
-  -webkit-animation: dot 1.3s infinite;
+  -webkit-animation: lz-image__keyframes 1.3s infinite;
   -webkit-animation-delay: 0.2s;
-  animation: dot 1.3s infinite;
+  animation: lz-image__keyframes 1.3s infinite;
   animation-delay: 0.2s;
 }
-
-.three {
+.lz-image__animation_three {
   opacity: 0;
-  -webkit-animation: dot 1.3s infinite;
+  -webkit-animation: lz-image__keyframes 1.3s infinite;
   -webkit-animation-delay: 0.3s;
-  animation: dot 1.3s infinite;
+  animation: lz-image__keyframes 1.3s infinite;
   animation-delay: 0.3s;
 }
 
-@-webkit-keyframes dot {
+@-webkit-keyframes lz-image__keyframes {
   0%, 50% {
     opacity: 0;
   }
@@ -65,7 +61,7 @@
   }
 }
 
-@-o-keyframes dot {
+@-o-keyframes lz-image__keyframes {
   0%, 50% {
     opacity: 0;
   }
@@ -74,7 +70,7 @@
   }
 }
 
-@-moz-keyframes dot {
+@-moz-keyframes lz-image__keyframes {
   0%, 50% {
     opacity: 0;
   }
@@ -83,7 +79,7 @@
   }
 }
 
-@keyframes dot {
+@keyframes lz-image__keyframes {
   0%, 50% {
     opacity: 0;
   }

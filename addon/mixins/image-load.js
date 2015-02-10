@@ -11,7 +11,7 @@ export default Mixin.create({
   loaded:      false,
   errorThrown: false,
 
-  classNameBindings: ['loaded', 'errorThrown'],
+  classNameBindings: ['loaded:lz-image_loaded', 'errorThrown'],
 
   defaultErrorText: computed('errorText', function() {
     return getWithDefault(this, 'errorText', 'Image failed to load');
@@ -19,16 +19,20 @@ export default Mixin.create({
 
   _resolveImage: on('didInsertElement', function() {
     var component = this;
-    var image     = component.$('img');
+    var image     = component.$('.lz-image__img');
     var isCached  = image[0].complete;
 
     if (!isCached) {
       image.on('load', function() {
-        component._imageLoaded();
+        if (image.attr('src') !== component.get('defaultLazyImage')) {
+          component._imageLoaded();
+          image.off('load error');
+        }
       });
 
       image.on('error', function(error) {
         component._imageError(error);
+        image.off('load error');
       });
     } else {
       this._imageLoaded();
@@ -52,7 +56,6 @@ export default Mixin.create({
   },
 
   willDestroyElement: function() {
-    this.$('img').off('load');
-    this.$('img').off('error');
+    this.$('.lz-image__img').off('load error');
   }
 });

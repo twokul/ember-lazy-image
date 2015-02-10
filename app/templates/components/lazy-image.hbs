@@ -1,7 +1,7 @@
 {{#if template}}
-  <div class="lazy-image-placeholder">{{yield}}</div>
+  <div class="lz-image__placeholder">{{yield}}</div>
 {{else}}
-  <div class="lazy-image-placeholder">
+  <div class="lz-image__placeholder">
     <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
      width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
     <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
@@ -21,6 +21,6 @@
   </div>
 {{/if}}
 {{#if errorThrown}}
-  <div class="lazy-image-error-message">{{defaultErrorText}}</div>
+  <div class="lz-image__error-message">{{defaultErrorText}}</div>
 {{/if}}
-<img class="lazy-image" {{bind-attr src=lazyUrl}} />
+<img class="lz-image__img" {{bind-attr src=lazyUrl}} />

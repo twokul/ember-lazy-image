@@ -12,16 +12,21 @@ var scheduleOnce = Ember.run.scheduleOnce;
 export default Mixin.create({
   scrollTimeout:   100,
   enteredViewport: null,
+  threshold: 0,
 
   _setViewport: function() {
     var rect = this.$()[0].getBoundingClientRect();
 
-    this.set('enteredViewport',
-      rect.top >= 0 &&
+    var enteredViewport = rect.top >= 0 &&
       rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
+      (rect.bottom - get(this, 'threshold')) <= (window.innerHeight || document.documentElement.clientHeight) &&
+      rect.right <= (window.innerWidth || document.documentElement.clientWidth);
+
+    this.set('enteredViewport', enteredViewport);
+
+    if (enteredViewport) {
+      this._unbindScroll();
+    }
   },
 
   _setInitialViewport: on('didInsertElement', function() {
@@ -39,17 +44,16 @@ export default Mixin.create({
   _bindScroll: on('didInsertElement', function() {
     var component = this;
 
-    Ember.$(document).on('touchmove.scrollable', function() {
-      component._scrollHandler();
-    });
-
-    Ember.$(window).on('scroll.scrollable', function() {
-      component._scrollHandler();
-    });
+    Ember.$(document).on('touchmove.scrollable' + this.elementId, component._scrollHandler.bind(component));
+    Ember.$(window).on('scroll.scrollable' + this.elementId, component._scrollHandler.bind(component));
   }),
 
-  _unbindScroll: on('willDestroyElement', function() {
-    Ember.$(window).off('.scrollable');
-    Ember.$(document).off('.scrollable');
+  onWillDestroyElement: on('willDestroyElement', function() {
+    this._unbindScroll();
   }),
+
+  _unbindScroll: function() {
+    Ember.$(document).off('.scrollable' + this.elementId);
+    Ember.$(window).off('.scrollable' + this.elementId);
+  }
 });
