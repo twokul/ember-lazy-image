@@ -20,7 +20,7 @@ test('it has correct defaults', function() {
 
   equal(get(component, 'loaded'),           false);
   equal(get(component, 'errorThrown'),      false);
-  equal(get(component, 'lazyUrl'),          null);
+  equal(get(component, 'lazyUrl'),          "//:0");
   equal(get(component, 'defaultErrorText'), 'Image failed to load');
 });
 
