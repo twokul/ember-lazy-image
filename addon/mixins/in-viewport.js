@@ -46,10 +46,15 @@ export default Mixin.create({
     Ember.$(window).on('scroll.scrollable', function() {
       component._scrollHandler();
     });
+
+    Ember.$(window).on('resize.resizable', function() {
+      component._scrollHandler();
+    });
   }),
 
   _unbindScroll: on('willDestroyElement', function() {
     Ember.$(window).off('.scrollable');
+    Ember.$(window).off('.resizable');
     Ember.$(document).off('.scrollable');
   }),
 });
