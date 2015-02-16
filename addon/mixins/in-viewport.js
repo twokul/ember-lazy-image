@@ -3,18 +3,18 @@
 
 import Ember from 'ember';
 
-var on           = Ember.on;
-var get          = Ember.get;
-var Mixin        = Ember.Mixin;
-var debounce     = Ember.run.debounce;
+var on = Ember.on;
+var get = Ember.get;
+var Mixin = Ember.Mixin;
+var debounce = Ember.run.debounce;
 var scheduleOnce = Ember.run.scheduleOnce;
 
 export default Mixin.create({
-  scrollTimeout:   100,
+  scrollTimeout: 100,
   enteredViewport: null,
   threshold: 0,
 
-  _setViewport: function() {
+  _setViewport: function () {
     var rect = this.$()[0].getBoundingClientRect();
 
     var enteredViewport = rect.top >= 0 &&
@@ -29,30 +29,35 @@ export default Mixin.create({
     }
   },
 
-  _setInitialViewport: on('didInsertElement', function() {
-    scheduleOnce('afterRender', this, function() {
+  _setInitialViewport: on('didInsertElement', function () {
+    scheduleOnce('afterRender', this, function () {
       this._setViewport();
     });
   }),
 
-  _scrollHandler: function() {
-    debounce(this, function() {
+  _scrollHandler: function () {
+    debounce(this, function () {
       this._setViewport();
     }, get(this, 'scrollTimeout'));
   },
 
-  _bindScroll: on('didInsertElement', function() {
+  _bindScroll: on('didInsertElement', function () {
     var component = this;
 
-    Ember.$(document).on('touchmove.scrollable' + this.elementId, component._scrollHandler.bind(component));
-    Ember.$(window).on('scroll.scrollable' + this.elementId, component._scrollHandler.bind(component));
+    Ember.$(document).on('touchmove.scrollable' + this.elementId, function () {
+      component._scrollHandler();
+    });
+
+    Ember.$(window).on('scroll.scrollable' + this.elementId, function () {
+      component._scrollHandler();
+    });
   }),
 
-  onWillDestroyElement: on('willDestroyElement', function() {
+  onWillDestroyElement: on('willDestroyElement', function () {
     this._unbindScroll();
   }),
 
-  _unbindScroll: function() {
+  _unbindScroll: function () {
     Ember.$(document).off('.scrollable' + this.elementId);
     Ember.$(window).off('.scrollable' + this.elementId);
   }
