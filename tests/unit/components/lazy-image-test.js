@@ -8,10 +8,10 @@ moduleForComponent('lazy-image', 'LazyImageComponent');
 
 var get = Ember.get;
 
-var imageSelector          = '.lazy-image';
-var placeholderSelector    = '.lazy-image-placeholder';
-var errorMessageSelector   = '.lazy-image-error-message';
-var imageContainerSelector = '.lazy-image-container';
+var imageSelector          = '.lz-image__img';
+var placeholderSelector    = '.lz-image__placeholder';
+var errorMessageSelector   = '.lz-image__error-message';
+var imageContainerSelector = '.lz-image';
 
 test('it has correct defaults', function() {
   expect(4);
@@ -20,7 +20,7 @@ test('it has correct defaults', function() {
 
   equal(get(component, 'loaded'),           false);
   equal(get(component, 'errorThrown'),      false);
-  equal(get(component, 'lazyUrl'),          "//:0");
+  equal(get(component, 'lazyUrl'),          "assets/lz-image/lazy_1x1.gif");
   equal(get(component, 'defaultErrorText'), 'Image failed to load');
 });
 

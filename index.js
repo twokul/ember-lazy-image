@@ -8,5 +8,6 @@ module.exports = {
     this._super.included(app);
 
     app.import('vendor/lazy-image/lazy-image.css');
+    app.import('vendor/lazy-image/lazy_1x1.gif', { destDir: 'assets/lz-image'});
   }
 };
