@@ -41,6 +41,12 @@ You can customize `error` text by passing it as an parameter:
 {{lazy-image url='http://my-not-valid-url.com/foo.jpg' errorText='Something went wrong.'}}
 ```
 
+It is also possible to define threshold (in pixels) for the image so it is preloaded when user is scrolling to it:
+
+```html
+{{lazy-image url='http://my-valid-url.com/foo.jpg' threshold=100}}`
+```
+
 ## Installation
 
 * `git clone` this repository
