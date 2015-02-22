@@ -4,6 +4,8 @@ import {
   test
 } from 'ember-qunit';
 
+import Cache from 'ember-lazy-image/lib/cache';
+
 moduleForComponent('lazy-image', 'LazyImageComponent');
 
 var get = Ember.get;
@@ -45,4 +47,31 @@ test('it renders default error message if image fails to load', function() {
 
   ok(component.$(errorMessageSelector).length > 0, 'error message is correctly rendered');
   ok(component.$(errorMessageSelector + ':contains("' + 'Image failed to load' + '")'), 'default error message is rendered correctly');
+});
+
+test('it leverages cache', function() {
+  // Setup sessionStorage
+  window.sessionStorage.clear();
+  Ember.run(function() {
+    Cache.create();
+  });
+
+  expect(1);
+
+  var component = this.subject({
+    url: 'http://emberjs.com/images/team/tdale.jpg'
+  });
+
+  this.append();
+
+  Ember.run(function() {
+    component.set('enteredViewport', true);
+  });
+
+  var lazyImages = window.sessionStorage['ember-lazy-images'];
+  var cache = lazyImages ? JSON.parse(lazyImages) : lazyImages;
+
+  deepEqual(cache, {
+    emberjscomimagesteamtdalejpg: true
+  });
 });
