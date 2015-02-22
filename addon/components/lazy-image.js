@@ -9,9 +9,9 @@ var dasherize   = Ember.String.dasherize;
 var observer    = Ember.observer;
 var computed    = Ember.computed;
 var Component   = Ember.Component;
-var cache       = Cache.create();
 
 export default Component.extend(InViewportMixin, ImageLoadMixin, {
+  cache: Cache.create(),
   lazyUrl: "//:0",
 
   classNames: ['lazy-image-container'],
@@ -20,6 +20,7 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, {
     var lazyUrl         = get(this, 'lazyUrl');
     var enteredViewport = get(this, 'enteredViewport');
     var url             = get(this, 'url');
+    var cache           = get(this, 'cache');
     var cacheKey        = get(this, '_cacheKey');
 
     if (cacheKey && get(cache, cacheKey)) {
@@ -28,7 +29,7 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, {
 
     if (enteredViewport && lazyUrl === "//:0") {
       set(this, 'lazyUrl', url);
-      
+
       if (cacheKey) {
         set(cache, cacheKey, true);
       }

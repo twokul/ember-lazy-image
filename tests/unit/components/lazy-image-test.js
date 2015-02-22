@@ -4,7 +4,7 @@ import {
   test
 } from 'ember-qunit';
 
-import Cache from 'ember-lazy-image/lib/cache.js';
+import Cache from 'ember-lazy-image/lib/cache';
 
 moduleForComponent('lazy-image', 'LazyImageComponent');
 
@@ -50,9 +50,11 @@ test('it renders default error message if image fails to load', function() {
 });
 
 test('it leverages cache', function() {
-  // Setup sessionStorage and init cache
+  // Setup sessionStorage
   window.sessionStorage.clear();
-  Cache.create();
+  Ember.run(function() {
+    Cache.create();
+  });
 
   expect(1);
 
@@ -62,9 +64,13 @@ test('it leverages cache', function() {
 
   this.append();
 
+  Ember.run(function() {
+    component.set('enteredViewport', true);
+  });
+
   var lazyImages = window.sessionStorage['ember-lazy-images'];
   var cache = lazyImages ? JSON.parse(lazyImages) : lazyImages;
-  
+
   deepEqual(cache, {
     emberjscomimagesteamtdalejpg: true
   });
