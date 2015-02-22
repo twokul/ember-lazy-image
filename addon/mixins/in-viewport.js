@@ -12,14 +12,16 @@ var scheduleOnce = Ember.run.scheduleOnce;
 export default Mixin.create({
   scrollTimeout:   100,
   enteredViewport: null,
+  threshold:       0,
 
   _setViewport: function() {
-    var rect = this.$()[0].getBoundingClientRect();
+    var rect      = this.$()[0].getBoundingClientRect();
+    var threshold = get(this, 'threshold');
 
     this.set('enteredViewport',
       rect.top >= 0 &&
       rect.left >= 0 &&
-      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+      (rect.bottom - threshold) <= (window.innerHeight || document.documentElement.clientHeight) &&
       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
   },
@@ -46,10 +48,15 @@ export default Mixin.create({
     Ember.$(window).on('scroll.scrollable', function() {
       component._scrollHandler();
     });
+
+    Ember.$(window).on('resize.resizable', function() {
+      component._scrollHandler();
+    });
   }),
 
   _unbindScroll: on('willDestroyElement', function() {
     Ember.$(window).off('.scrollable');
+    Ember.$(window).off('.resizable');
     Ember.$(document).off('.scrollable');
   }),
 });
