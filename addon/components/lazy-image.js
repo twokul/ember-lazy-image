@@ -1,7 +1,7 @@
 import Ember           from 'ember';
 import ImageLoadMixin  from '../mixins/image-load';
 import InViewportMixin from '../mixins/in-viewport';
-import cache           from '../models/cache';
+import Cache           from '../lib/cache';
 
 var get         = Ember.get;
 var set         = Ember.set;
@@ -9,6 +9,7 @@ var dasherize   = Ember.String.dasherize;
 var observer    = Ember.observer;
 var computed    = Ember.computed;
 var Component   = Ember.Component;
+var cache       = Cache.create();
 
 export default Component.extend(InViewportMixin, ImageLoadMixin, {
   lazyUrl: "//:0",
@@ -21,19 +22,29 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, {
     var url             = get(this, 'url');
     var cacheKey        = get(this, '_cacheKey');
 
-    if (get(cache, cacheKey)) {
+    if (cacheKey && get(cache, cacheKey)) {
       set(this, 'lazyUrl', url);
     }
 
     if (enteredViewport && lazyUrl === "//:0") {
       set(this, 'lazyUrl', url);
-      set(cache, cacheKey, true);
+      
+      if (cacheKey) {
+        set(cache, cacheKey, true);
+      }
     }
   }).on('didInsertElement'),
 
   _cacheKey: computed('url', function() {
     var url = this.get('url');
+    var key;
 
-    return dasherize(url.replace(/^http[s]?\:\/\/|\.|\//g, ''));
+    if (url) {
+      key = dasherize(url.replace(/^http[s]?\:\/\/|\.|\//g, ''));
+    }
+
+    if (key) {
+      return key;
+    }
   })
 });
