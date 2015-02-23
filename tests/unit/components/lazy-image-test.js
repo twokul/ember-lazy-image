@@ -8,6 +8,7 @@ import Cache from 'ember-lazy-image/lib/cache';
 
 moduleForComponent('lazy-image', 'LazyImageComponent');
 
+var run = Ember.run;
 var get = Ember.get;
 
 var imageSelector          = '.lazy-image';
@@ -52,7 +53,8 @@ test('it renders default error message if image fails to load', function() {
 test('it leverages cache', function() {
   // Setup sessionStorage
   window.sessionStorage.clear();
-  Ember.run(function() {
+
+  run(function() {
     Cache.create();
   });
 
@@ -64,7 +66,7 @@ test('it leverages cache', function() {
 
   this.append();
 
-  Ember.run(function() {
+  run(function() {
     component.set('enteredViewport', true);
   });
 
