@@ -33,7 +33,7 @@
     "express": "^4.8.5",
     "glob": "^4.0.5"
   },
-  "depenedencies": {
+  "dependencies": {
     "ember-local-storage": "0.0.2"
   },
   "keywords": [
