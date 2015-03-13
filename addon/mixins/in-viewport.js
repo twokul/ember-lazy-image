@@ -15,8 +15,12 @@ export default Mixin.create({
   threshold:       0,
 
   _setViewport: function() {
-    var rect      = this.$()[0].getBoundingClientRect();
+    var rect      = this.$() ? this.$()[0].getBoundingClientRect() : null;
     var threshold = get(this, 'threshold');
+
+    if (!rect) {
+      return;
+    }
 
     this.set('enteredViewport',
       rect.top >= 0 &&
