@@ -26,7 +26,7 @@ export default Mixin.create({
       rect.top >= 0 &&
       rect.left >= 0 &&
       (rect.bottom - threshold) <= (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      (rect.right - threshold) <= (window.innerWidth || document.documentElement.clientWidth)
     );
   },
 
