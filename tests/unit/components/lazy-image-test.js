@@ -16,41 +16,41 @@ var placeholderSelector    = '.lazy-image-placeholder';
 var errorMessageSelector   = '.lazy-image-error-message';
 var imageContainerSelector = '.lazy-image-container';
 
-test('it has correct defaults', function() {
-  expect(4);
+test('it has correct defaults', function(assert) {
+  assert.expect(4);
 
   var component = this.subject();
 
-  equal(get(component, 'loaded'),           false);
-  equal(get(component, 'errorThrown'),      false);
-  equal(get(component, 'lazyUrl'),          "//:0");
-  equal(get(component, 'defaultErrorText'), 'Image failed to load');
+  assert.equal(get(component, 'loaded'),           false);
+  assert.equal(get(component, 'errorThrown'),      false);
+  assert.equal(get(component, 'lazyUrl'),          "//:0");
+  assert.equal(get(component, 'defaultErrorText'), 'Image failed to load');
 });
 
-test('it renders default placeholder', function() {
-  expect(1);
+test('it renders default placeholder', function(assert) {
+  assert.expect(1);
 
   var component = this.subject();
 
-  this.append();
+  this.render();
 
-  ok(component.$(placeholderSelector).length > 0, 'placeholder is correctly rendered');
+  assert.ok(component.$(placeholderSelector).length > 0, 'placeholder is correctly rendered');
 });
 
-test('it renders default error message if image fails to load', function() {
-  expect(2);
+test('it renders default error message if image fails to load', function(assert) {
+  assert.expect(2);
 
   var component = this.subject();
 
   component._imageError();
 
-  this.append();
+  this.render();
 
-  ok(component.$(errorMessageSelector).length > 0, 'error message is correctly rendered');
-  ok(component.$(errorMessageSelector + ':contains("' + 'Image failed to load' + '")'), 'default error message is rendered correctly');
+  assert.ok(component.$(errorMessageSelector).length > 0, 'error message is correctly rendered');
+  assert.ok(component.$(errorMessageSelector + ':contains("' + 'Image failed to load' + '")'), 'default error message is rendered correctly');
 });
 
-test('it leverages cache', function() {
+test('it leverages cache', function(assert) {
   // Setup sessionStorage
   window.sessionStorage.clear();
 
@@ -58,13 +58,13 @@ test('it leverages cache', function() {
     Cache.create();
   });
 
-  expect(1);
+  assert.expect(1);
 
   var component = this.subject({
     url: 'http://emberjs.com/images/team/tdale.jpg'
   });
 
-  this.append();
+  this.render();
 
   run(function() {
     component.set('enteredViewport', true);
@@ -73,7 +73,33 @@ test('it leverages cache', function() {
   var lazyImages = window.sessionStorage['ember-lazy-images'];
   var cache = lazyImages ? JSON.parse(lazyImages) : lazyImages;
 
-  deepEqual(cache, {
+  assert.deepEqual(cache, {
     emberjscomimagesteamtdalejpg: true
   });
+});
+
+test('`width` and `height` bindings work correctly', function(assert) {
+  assert.expect(2);
+
+  var component = this.subject({
+    width: 400,
+    height: 400
+  });
+
+  this.render();
+
+  assert.equal(component.$('img').attr('width'), 400, 'width is correct');
+  assert.equal(component.$('img').attr('height'), 400, 'height is correct');
+});
+
+test('`data-*` attribute bindings work correctly', function(assert) {
+  assert.expect(1);
+
+  var component = this.subject({
+    'data-person-id': 1234
+  });
+
+  this.render();
+
+  assert.equal(component.$('img').attr('data-person-id'), 1234, 'data attribute is correct');
 });
