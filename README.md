@@ -22,7 +22,7 @@ npm install ember-lazy-image --save
 ```
 
 Component will wait until the image is loaded and while waiting it will show default
-loading placeholder (seee above).
+loading placeholder (see above).
 
 You can customize `loading` placeholder by passing it as an parameter:
 
@@ -45,6 +45,15 @@ It is also possible to define threshold (in pixels) for the image so it is prelo
 
 ```html
 {{lazy-image url='http://my-valid-url.com/foo.jpg' threshold=100}}`
+```
+
+### `width`, `height` and `data-*` attributes
+
+Lazy Image supports `width`, `height` and `data-*` attribute bindings.
+
+```html
+{{lazy-image url='http://my-valid-url.com/foo.jpg' width=400 height=400 data-foo-bar="my-foo-bar"}}
+{{lazy-image url='http://my-valid-url.com/foo.jpg' width=400 height=400 data-foo-bar=foo.bar.path}}
 ```
 
 ## Installation
