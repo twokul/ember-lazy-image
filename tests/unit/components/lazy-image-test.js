@@ -92,6 +92,19 @@ test('`width` and `height` bindings work correctly', function(assert) {
   assert.equal(component.$('img').attr('height'), 400, 'height is correct');
 });
 
+test('`width` and `height` are not used if set to 0 or unset', function(assert) {
+  assert.expect(2);
+
+  var component = this.subject({
+    width: 400
+  });
+
+  this.render();
+
+  assert.equal(component.$('img').attr('width'), undefined, 'width is not used');
+  assert.equal(component.$('img').attr('height'), undefined, 'height is not used');
+});
+
 test('`data-*` attribute bindings work correctly', function(assert) {
   assert.expect(1);
 

@@ -28,4 +28,9 @@
     </div>
   {{/if}}
 {{/if}}
-<img class="lazy-image" {{bind-attr src=lazyUrl height=height width=width}} />
+
+{{#if useDimensionsAttrs}}
+  <img class="lazy-image" {{bind-attr src=lazyUrl height=height width=width}} />
+{{else}}
+  <img class="lazy-image" {{bind-attr src=lazyUrl}} />
+{{/if}}
