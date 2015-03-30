@@ -61,5 +61,10 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, {
     if (key) {
       return key;
     }
+  }),
+
+  useDimensionsAttrs: computed('width', 'height', function() {
+    return ! this.get('width') || ! this.get('height') ? false : true;
   })
+
 });
