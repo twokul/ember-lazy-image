@@ -19,6 +19,15 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, {
 
   classNames: ['lazy-image-container'],
 
+  concatenatedProperties: ['class'],
+
+  class: ['lazy-image'],
+
+  _classJoin: function() {
+    var classArray = this.get('class'); 
+    this.set('class', classArray.join(' '));
+  }.on('init'),
+
   setupAttributes: on('didInsertElement', function() {
     var img       = this.$('img');
     var component = this;
