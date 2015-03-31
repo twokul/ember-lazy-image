@@ -56,6 +56,14 @@ Lazy Image supports `width`, `height` and `data-*` attribute bindings.
 {{lazy-image url='http://my-valid-url.com/foo.jpg' width=400 height=400 data-foo-bar=foo.bar.path}}
 ```
 
+### `class` attribute
+
+You can also pass class names for the image element.
+
+```html
+{{lazy-image url='http://my-valid-url.com/foo.jpg' class='foo-bar baz-bar'}}
+```
+
 ## Installation
 
 * `git clone` this repository

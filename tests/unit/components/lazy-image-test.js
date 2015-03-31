@@ -17,7 +17,7 @@ var errorMessageSelector   = '.lazy-image-error-message';
 var imageContainerSelector = '.lazy-image-container';
 
 test('it has correct defaults', function(assert) {
-  assert.expect(4);
+  assert.expect(5);
 
   var component = this.subject();
 
@@ -25,6 +25,7 @@ test('it has correct defaults', function(assert) {
   assert.equal(get(component, 'errorThrown'),      false);
   assert.equal(get(component, 'lazyUrl'),          "//:0");
   assert.equal(get(component, 'defaultErrorText'), 'Image failed to load');
+  assert.equal(get(component, 'class'),            'lazy-image');
 });
 
 test('it renders default placeholder', function(assert) {
@@ -115,4 +116,17 @@ test('`data-*` attribute bindings work correctly', function(assert) {
   this.render();
 
   assert.equal(component.$('img').attr('data-person-id'), 1234, 'data attribute is correct');
+});
+
+test('passing class names for the <img> element', function(assert) {
+  assert.expect(1);
+
+  var component = this.subject({
+    class: 'img-responsive image-thumbnail'
+  });
+
+  this.render();
+ 
+  var expected = 'lazy-image img-responsive image-thumbnail';
+  assert.equal(component.$('img').attr('class'), expected);
 });

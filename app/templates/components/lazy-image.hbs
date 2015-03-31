@@ -30,7 +30,8 @@
 {{/if}}
 
 {{#if useDimensionsAttrs}}
-  <img class="lazy-image" {{bind-attr src=lazyUrl height=height width=width}} />
+  <img class="{{unbound class}}" {{bind-attr src=lazyUrl height=height width=width}} />
 {{else}}
-  <img class="lazy-image" {{bind-attr src=lazyUrl}} />
+  <img class="{{unbound class}}" {{bind-attr src=lazyUrl}} />
 {{/if}}
+
