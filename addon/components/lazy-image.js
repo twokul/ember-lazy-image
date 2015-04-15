@@ -11,6 +11,7 @@ var observer  = Ember.observer;
 var computed  = Ember.computed;
 var dasherize = Ember.String.dasherize;
 var Component = Ember.Component;
+var forEach   = Ember.EnumerableUtils.forEach;
 
 export default Component.extend(InViewportMixin, ImageLoadMixin, {
   _cache: Cache.create(),
@@ -23,23 +24,23 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, {
 
   class: ['lazy-image'],
 
-  _classJoin: function() {
-    var classArray = this.get('class'); 
-    this.set('class', classArray.join(' '));
-  }.on('init'),
+  _classJoin: on('init', function() {
+    var classArray = get(this, 'class');
+    set(this, 'class', classArray.join(' '));
+  }),
 
   setupAttributes: on('didInsertElement', function() {
     var img       = this.$('img');
     var component = this;
 
-    keys(component).forEach(function(key) {
+    forEach(keys(component), function(key) {
       if (key.substr(0, 5) === 'data-' && !key.match(/Binding$/)) {
         img.attr(key, component.get(key));
       }
     });
   }),
 
-  setImageUrl: observer('enteredViewport', function() {
+  setImageUrl: on('didInsertElement', (observer('enteredViewport', function() {
     var url             = get(this, 'url');
     var cache           = get(this, '_cache');
     var lazyUrl         = get(this, 'lazyUrl');
@@ -57,7 +58,7 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, {
         set(cache, cacheKey, true);
       }
     }
-  }).on('didInsertElement'),
+  }))),
 
   _cacheKey: computed('url', function() {
     var url = this.get('url');
@@ -75,5 +76,4 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, {
   useDimensionsAttrs: computed('width', 'height', function() {
     return ! this.get('width') || ! this.get('height') ? false : true;
   })
-
 });

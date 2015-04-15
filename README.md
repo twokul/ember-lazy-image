@@ -17,7 +17,7 @@ npm install ember-lazy-image --save
 
 ### lazy-image
 
-```html
+```hbs
 {{lazy-image url='http://my-valid-url.com/foo.jpg'}}
 ```
 
@@ -26,7 +26,7 @@ loading placeholder (see above).
 
 You can customize `loading` placeholder by passing it as an parameter:
 
-```html
+```hbs
 {{#lazy-image url='http://my-valid-url.com/foo.jpg'}}
   <!-- custom template goes here, spinner, svg, etc. -->
 {{/lazy-image}}
@@ -37,13 +37,13 @@ You can also define the fallback if the image failed to load. By default, compon
 
 You can customize `error` text by passing it as an parameter:
 
-```html
+```hbs
 {{lazy-image url='http://my-not-valid-url.com/foo.jpg' errorText='Something went wrong.'}}
 ```
 
 It is also possible to define threshold (in pixels) for the image so it is preloaded when user is scrolling to it:
 
-```html
+```hbs
 {{lazy-image url='http://my-valid-url.com/foo.jpg' threshold=100}}`
 ```
 
@@ -51,7 +51,7 @@ It is also possible to define threshold (in pixels) for the image so it is prelo
 
 Lazy Image supports `width`, `height` and `data-*` attribute bindings.
 
-```html
+```hbs
 {{lazy-image url='http://my-valid-url.com/foo.jpg' width=400 height=400 data-foo-bar="my-foo-bar"}}
 {{lazy-image url='http://my-valid-url.com/foo.jpg' width=400 height=400 data-foo-bar=foo.bar.path}}
 ```
@@ -60,7 +60,7 @@ Lazy Image supports `width`, `height` and `data-*` attribute bindings.
 
 You can also pass class names for the image element.
 
-```html
+```hbs
 {{lazy-image url='http://my-valid-url.com/foo.jpg' class='foo-bar baz-bar'}}
 ```
 

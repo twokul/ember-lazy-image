@@ -126,7 +126,7 @@ test('passing class names for the <img> element', function(assert) {
   });
 
   this.render();
- 
+
   var expected = 'lazy-image img-responsive image-thumbnail';
   assert.equal(component.$('img').attr('class'), expected);
 });
