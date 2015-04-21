@@ -1,7 +1,7 @@
 import Cache           from '../lib/cache';
 import Ember           from 'ember';
 import ImageLoadMixin  from '../mixins/image-load';
-import InViewportMixin from '../mixins/in-viewport';
+import InViewportMixin from 'ember-in-viewport';
 
 var on        = Ember.on;
 var get       = Ember.get;
@@ -40,18 +40,18 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, {
     });
   }),
 
-  setImageUrl: on('didInsertElement', (observer('enteredViewport', function() {
+  setImageUrl: on('didInsertElement', (observer('viewportEntered', function() {
     var url             = get(this, 'url');
     var cache           = get(this, '_cache');
     var lazyUrl         = get(this, 'lazyUrl');
     var cacheKey        = get(this, '_cacheKey');
-    var enteredViewport = get(this, 'enteredViewport');
+    var viewportEntered = get(this, 'viewportEntered');
 
     if (cacheKey && get(cache, cacheKey)) {
       set(this, 'lazyUrl', url);
     }
 
-    if (enteredViewport && lazyUrl === "//:0") {
+    if (viewportEntered && lazyUrl === "//:0") {
       set(this, 'lazyUrl', url);
 
       if (cacheKey) {
