@@ -33,7 +33,7 @@
     "ember-try": "0.0.4"
   },
   "dependencies": {
-    "ember-local-storage": "0.0.2",
+    "ember-local-storage": "0.0.3",
     "ember-cli-babel": "^5.0.0"
   },
   "keywords": [
