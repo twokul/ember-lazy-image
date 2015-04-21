@@ -2,6 +2,7 @@ import Cache           from '../lib/cache';
 import Ember           from 'ember';
 import ImageLoadMixin  from '../mixins/image-load';
 import InViewportMixin from 'ember-in-viewport';
+import CompMixin       from '../mixins/comp';
 
 var on        = Ember.on;
 var get       = Ember.get;
@@ -13,7 +14,7 @@ var dasherize = Ember.String.dasherize;
 var Component = Ember.Component;
 var forEach   = Ember.EnumerableUtils.forEach;
 
-export default Component.extend(InViewportMixin, ImageLoadMixin, {
+export default Component.extend(InViewportMixin, ImageLoadMixin, CompMixin, {
   _cache: Cache.create(),
 
   lazyUrl: "//:0",
