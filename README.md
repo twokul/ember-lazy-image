@@ -65,7 +65,7 @@ Lazy Image uses [ember-in-viewport](https://github.com/dockyard/ember-in-viewpor
 ```js
 // app/components/lazy-image.js
 
-import Ember form 'ember';
+import Ember from 'ember';
 import LazyImage from 'ember-lazy-image/components/lazy-image';
 
 export default LazyImage.extend({
@@ -85,7 +85,7 @@ export default LazyImage.extend({
 });
 ```
 
-See [Advanced usage (options)](https://github.com/dockyard/ember-in-viewport/blob/develop/README.md#advanced-usage-options) for more in detail `ember-in-viewport` options.
+See [Advanced usage (options)](https://github.com/dockyard/ember-in-viewport/tree/1.0.0#advanced-usage-options) for more in detail `ember-in-viewport` options.
 
 The use of `threshold` is deprecated in favor of `viewportTolerance`.
 
