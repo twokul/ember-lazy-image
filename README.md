@@ -60,7 +60,7 @@ You can also pass class names for the image element.
 
 ### ember-in-viewport options
 
-Lazy Image uses `ember-in-viewport` for viewport detaction. Due to the way listeners and `requestAnimationFrame` is setup, you'll have to override the `ember-in-viewport` options by creating `app/components/lazy-image.js`:
+Lazy Image uses [ember-in-viewport](https://github.com/dockyard/ember-in-viewport/) for viewport detection. Due to the way listeners and `requestAnimationFrame` is setup, you'll have to override the `ember-in-viewport` options by creating `app/components/lazy-image.js`:
 
 ```js
 // app/components/lazy-image.js
