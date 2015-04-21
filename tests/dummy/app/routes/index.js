@@ -2,7 +2,7 @@ import Ember from "ember";
 
 export default Ember.Route.extend({
   model: function() {
-    return [{
+    return Ember.A([{
       text: 'Yehuda Katz',
       url:  'http://emberjs.com/images/team/ykatz.jpg'
     }, {
@@ -35,6 +35,6 @@ export default Ember.Route.extend({
     }, {
       text: 'Igor Terzic',
       url:  'http://emberjs.com/images/team/iterzic.jpeg'
-    }];
+    }]);
   }
 });
