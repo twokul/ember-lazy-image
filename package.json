@@ -1,6 +1,6 @@
 {
   "name": "ember-lazy-image",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Lazy image loading for Ember apps",
   "directories": {
     "doc": "doc",
