@@ -68,7 +68,7 @@ test('it leverages cache', function(assert) {
   this.render();
 
   run(function() {
-    component.set('enteredViewport', true);
+    component.set('viewportEntered', true);
   });
 
   var lazyImages = window.sessionStorage['ember-lazy-images'];
