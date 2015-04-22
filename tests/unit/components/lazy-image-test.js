@@ -130,24 +130,3 @@ test('passing class names for the <img> element', function(assert) {
   var expected = 'lazy-image img-responsive image-thumbnail';
   assert.equal(component.$('img').attr('class'), expected);
 });
-
-test('deprecates threshold', function(assert) {
-  assert.expect(2);
-
-  const component = this.subject({
-    threshold: 100
-  });
-
-  assert.throws(() => {
-    this.render();
-  }, new Error('The use of `threshold` is deprecated in favor of `viewportTolerance`.'));
-
-  const expected = {
-    top: 100,
-    left: 100,
-    bottom: 100,
-    right: 100
-  };
-
-  assert.deepEqual(component.get('viewportTolerance'), expected);
-});
