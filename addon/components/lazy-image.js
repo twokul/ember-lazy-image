@@ -7,7 +7,6 @@ var on        = Ember.on;
 var get       = Ember.get;
 var set       = Ember.set;
 var keys      = Ember.keys;
-var observer  = Ember.observer;
 var computed  = Ember.computed;
 var dasherize = Ember.String.dasherize;
 var Component = Ember.Component;
@@ -29,18 +28,12 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, {
     set(this, 'class', classArray.join(' '));
   }),
 
-  setupAttributes: on('didInsertElement', function() {
-    var img       = this.$('img');
-    var component = this;
-
-    forEach(keys(component), function(key) {
-      if (key.substr(0, 5) === 'data-' && !key.match(/Binding$/)) {
-        img.attr(key, component.get(key));
-      }
-    });
+  handleDidInsertElement: on('didInsertElement', function() {
+    this._setupAttributes();
+    this._setImageUrl();
   }),
 
-  setImageUrl: on('didInsertElement', (observer('viewportEntered', function() {
+  _setImageUrl: on('didEnterViewport', function() {
     var url             = get(this, 'url');
     var cache           = get(this, '_cache');
     var lazyUrl         = get(this, 'lazyUrl');
@@ -58,7 +51,18 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, {
         set(cache, cacheKey, true);
       }
     }
-  }))),
+  }),
+
+  _setupAttributes: function() {
+    var img       = this.$('img');
+    var component = this;
+
+    forEach(keys(component), function(key) {
+      if (key.substr(0, 5) === 'data-' && !key.match(/Binding$/)) {
+        img.attr(key, component.get(key));
+      }
+    });
+  },
 
   _cacheKey: computed('url', function() {
     var url = this.get('url');

@@ -6,7 +6,14 @@ import {
 
 import Cache from 'ember-lazy-image/lib/cache';
 
-moduleForComponent('lazy-image', 'LazyImageComponent');
+moduleForComponent('lazy-image', 'LazyImageComponent', {
+  beforeEach: function() {
+    this.container.register('config:in-viewport', { viewportUseRAF: false }, { instantiate: false });
+
+    // Setup sessionStorage
+    window.sessionStorage.clear();
+  }
+});
 
 var run = Ember.run;
 var get = Ember.get;
@@ -52,9 +59,6 @@ test('it renders default error message if image fails to load', function(assert)
 });
 
 test('it leverages cache', function(assert) {
-  // Setup sessionStorage
-  window.sessionStorage.clear();
-
   run(function() {
     Cache.create();
   });
@@ -69,6 +73,7 @@ test('it leverages cache', function(assert) {
 
   run(function() {
     component.set('viewportEntered', true);
+    component.trigger('didEnterViewport');
   });
 
   var lazyImages = window.sessionStorage['ember-lazy-images'];
