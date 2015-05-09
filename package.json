@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "ember-cli-babel": "^5.0.0",
-    "ember-in-viewport": "1.2.1",
+    "ember-in-viewport": "^1.2.2",
     "ember-local-storage": "0.0.4"
   },
   "keywords": [
