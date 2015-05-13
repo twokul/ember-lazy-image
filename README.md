@@ -89,6 +89,11 @@ See [Advanced usage (options)](https://github.com/dockyard/ember-in-viewport/tre
 
 The use of `threshold` is deprecated in favor of `viewportTolerance`.
 
+### Experimental `lazy-background-image`
+
+This is an experimental component that will add `background-image` style attribute to a component's `div`. It also
+sets `min-height` attribute to `270px` so the image is visible. You should be able to overwrite it by using `lazy-background-image` class.
+
 ## Installation
 
 * `git clone` this repository
