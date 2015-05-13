@@ -26,8 +26,18 @@
   display: none;
 }
 
+.lazy-background-image.loaded .lazy-image-placeholder {
+  display: none;
+}
+
 .lazy-image-placeholder {
   position: absolute;
   top: 50%;
   right: 50%;
+}
+
+.lazy-background-image {
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 270px;
 }
