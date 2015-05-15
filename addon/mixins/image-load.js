@@ -1,11 +1,6 @@
 import Ember from 'ember';
 
-var on             = Ember.on;
-var set            = Ember.set;
-var run            = Ember.run;
-var Mixin          = Ember.Mixin;
-var computed       = Ember.computed;
-var getWithDefault = Ember.getWithDefault;
+const { on, set, run, Mixin, computed, getWithDefault } = Ember;
 
 export default Mixin.create({
   loaded:      false,
@@ -18,9 +13,9 @@ export default Mixin.create({
   }),
 
   _resolveImage: on('didInsertElement', function() {
-    var component = this;
-    var image     = component.$('img');
-    var isCached  = image[0].complete;
+    const component = this;
+    const image     = component.$('img');
+    const isCached  = image[0].complete;
 
     if (!isCached) {
       image.on('load', function() {
@@ -36,17 +31,17 @@ export default Mixin.create({
   }),
 
   _imageLoaded: function() {
-    var component = this;
+    const component = this;
 
-    run(function() {
+    run(() => {
       set(component, 'loaded', true);
     });
   },
 
   _imageError: function() {
-    var component = this;
+    const component = this;
 
-    run(function() {
+    run(() => {
       set(component, 'errorThrown', true);
     });
   },

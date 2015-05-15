@@ -1,17 +1,13 @@
 import Ember from 'ember';
 import Cache from '../lib/cache';
 
-var on        = Ember.on;
-var get       = Ember.get;
-var set       = Ember.set;
-var Mixin     = Ember.Mixin;
-var dasherize = Ember.String.dasherize;
-var computed  = Ember.computed;
+const { on, get, set, Mixin, computed } = Ember;
+const dasherize = Ember.String.dasherize;
 
 export default Mixin.create({
   _cache: Cache.create(),
 
-  lazyUrl: "//:0",
+  lazyUrl: null,
 
   handleDidInsertElement: on('didInsertElement', function() {
     this._setupAttributes();
@@ -19,17 +15,17 @@ export default Mixin.create({
   }),
 
   _setImageUrl: on('didEnterViewport', function() {
-    var url             = get(this, 'url');
-    var cache           = get(this, '_cache');
-    var lazyUrl         = get(this, 'lazyUrl');
-    var cacheKey        = get(this, '_cacheKey');
-    var viewportEntered = get(this, 'viewportEntered');
+    const url             = get(this, 'url');
+    const cache           = get(this, '_cache');
+    const lazyUrl         = get(this, 'lazyUrl');
+    const cacheKey        = get(this, '_cacheKey');
+    const viewportEntered = get(this, 'viewportEntered');
 
     if (cacheKey && get(cache, cacheKey)) {
       set(this, 'lazyUrl', url);
     }
 
-    if (viewportEntered && lazyUrl === "//:0") {
+    if (viewportEntered && lazyUrl === null) {
       set(this, 'lazyUrl', url);
 
       if (cacheKey) {

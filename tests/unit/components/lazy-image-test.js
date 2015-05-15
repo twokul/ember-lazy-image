@@ -30,7 +30,7 @@ test('it has correct defaults', function(assert) {
 
   assert.equal(get(component, 'loaded'),           false);
   assert.equal(get(component, 'errorThrown'),      false);
-  assert.equal(get(component, 'lazyUrl'),          "//:0");
+  assert.equal(get(component, 'lazyUrl'),          null);
   assert.equal(get(component, 'defaultErrorText'), 'Image failed to load');
   assert.equal(get(component, 'class'),            'lazy-image');
 });
