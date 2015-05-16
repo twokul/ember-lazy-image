@@ -9,9 +9,23 @@ This optimization brings page load time down.
 
 Default loading placeholder is stolen from [aurer](https://github.com/aurer) and his awesome [codepen](http://codepen.io/aurer/pen/jEGbA).
 
-### Usage
+### Installation
 
-```sh
+From inside your ember-cli project, run the following:
+
+```bash
+ember install ember-lazy-image
+```
+
+#### Installation for ember-cli 0.1.5 - 0.2.2
+
+```bash
+ember install:addon ember-lazy-image
+```
+
+#### Installation without ember-cli
+
+```bash
 npm install ember-lazy-image --save
 ```
 
