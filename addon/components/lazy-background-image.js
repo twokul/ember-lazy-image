@@ -9,7 +9,7 @@ const forEach = EnumerableUtils.forEach;
 export default Component.extend(InViewportMixin, ImageLoadMixin, LazyImageMixin, {
   attributeBindings: ['width', 'height', 'style'],
 
-  style: computed('lazyUrl', function() {
+  style: computed('loaded', function() {
     return 'background-image: url(' + this.get('lazyUrl') + ')';
   }),
 
