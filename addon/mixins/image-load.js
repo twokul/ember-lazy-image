@@ -12,42 +12,23 @@ export default Mixin.create({
     return getWithDefault(this, 'errorText', 'Image failed to load');
   }),
 
-  _resolveImage: on('didInsertElement', function() {
+  _resolveImage: on('didRender', function() {
     const component = this;
     const image     = component.$('img');
     const isCached  = image[0].complete;
 
     if (!isCached) {
-      image.on('load', function() {
-        component._imageLoaded();
+      image.one('load', () => {
+        image.off('error');
+        run.schedule('afterRender', component, () => set(component, 'loaded', true));
       });
 
-      image.on('error', function(error) {
-        component._imageError(error);
+      image.one('error', () => {
+        image.off('load');
+        run.schedule('afterRender', component, () => set(component, 'errorThrown', true));
       });
     } else {
-      this._imageLoaded();
+      run.schedule('afterRender', component, () => set(component, 'loaded', true));
     }
-  }),
-
-  _imageLoaded: function() {
-    const component = this;
-
-    run(() => {
-      set(component, 'loaded', true);
-    });
-  },
-
-  _imageError: function() {
-    const component = this;
-
-    run(() => {
-      set(component, 'errorThrown', true);
-    });
-  },
-
-  willDestroyElement: function() {
-    this.$('img').off('load');
-    this.$('img').off('error');
-  }
+  })
 });

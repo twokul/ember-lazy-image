@@ -3,8 +3,7 @@ import ImageLoadMixin  from '../mixins/image-load';
 import LazyImageMixin  from '../mixins/lazy-image';
 import InViewportMixin from 'ember-in-viewport';
 
-const { on, get, set, keys, computed, Component, EnumerableUtils } = Ember;
-const forEach = EnumerableUtils.forEach;
+const { on, get, set, computed, Component } = Ember;
 
 export default Component.extend(InViewportMixin, ImageLoadMixin, LazyImageMixin, {
   classNames: ['lazy-image-container'],
@@ -18,11 +17,12 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, LazyImageMixin,
     set(this, 'class', classArray.join(' '));
   }),
 
-  _setupAttributes: function() {
+  _setupAttributes() {
     const img       = this.$('img');
     const component = this;
+    const keys = Object.keys || Ember.keys;
 
-    forEach(keys(component), (key) => {
+    keys(component).forEach((key) => {
       if (key.substr(0, 5) === 'data-' && !key.match(/Binding$/)) {
         img.attr(key, component.get(key));
       }
