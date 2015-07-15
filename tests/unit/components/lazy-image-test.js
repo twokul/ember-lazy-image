@@ -5,28 +5,28 @@ import {
 } from 'ember-qunit';
 
 import Cache from 'ember-lazy-image/lib/cache';
+import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('lazy-image', 'LazyImageComponent', {
-  beforeEach: function() {
-    this.container.register('config:in-viewport', { viewportUseRAF: false }, { instantiate: false });
+  unit: true,
 
-    // Setup sessionStorage
+  beforeEach() {
     window.sessionStorage.clear();
   }
 });
 
-var run = Ember.run;
-var get = Ember.get;
+const { run } = Ember;
+const get = Ember.get;
 
-var imageSelector          = '.lazy-image';
-var placeholderSelector    = '.lazy-image-placeholder';
-var errorMessageSelector   = '.lazy-image-error-message';
-var imageContainerSelector = '.lazy-image-container';
+const imageSelector          = '.lazy-image';
+const placeholderSelector    = '.lazy-image-placeholder';
+const errorMessageSelector   = '.lazy-image-error-message';
+const imageContainerSelector = '.lazy-image-container';
 
 test('it has correct defaults', function(assert) {
   assert.expect(5);
 
-  var component = this.subject();
+  const component = this.subject();
 
   assert.equal(get(component, 'loaded'),           false);
   assert.equal(get(component, 'errorThrown'),      false);
@@ -38,19 +38,17 @@ test('it has correct defaults', function(assert) {
 test('it renders default placeholder', function(assert) {
   assert.expect(1);
 
-  var component = this.subject();
+  this.render(hbs`{{lazy-image}}`);
 
-  this.render();
-
-  assert.ok(component.$(placeholderSelector).length > 0, 'placeholder is correctly rendered');
+  assert.ok(this.$(placeholderSelector).length > 0, 'placeholder is correctly rendered');
 });
 
 test('it renders default error message if image fails to load', function(assert) {
   assert.expect(2);
 
-  var component = this.subject();
-
-  component._imageError();
+  const component = this.subject({
+    errorThrown: true
+  });
 
   this.render();
 
@@ -59,25 +57,25 @@ test('it renders default error message if image fails to load', function(assert)
 });
 
 test('it leverages cache', function(assert) {
-  run(function() {
+  run(() => {
     Cache.create();
   });
 
   assert.expect(1);
 
-  var component = this.subject({
+  const component = this.subject({
     url: 'http://emberjs.com/images/team/tdale.jpg'
   });
 
   this.render();
 
-  run(function() {
+  run(() => {
     component.set('viewportEntered', true);
     component.trigger('didEnterViewport');
   });
 
-  var lazyImages = window.sessionStorage['ember-lazy-images'];
-  var cache = lazyImages ? JSON.parse(lazyImages) : lazyImages;
+  let lazyImages = window.sessionStorage['ember-lazy-images'];
+  let cache = lazyImages ? JSON.parse(lazyImages) : lazyImages;
 
   assert.deepEqual(cache, {
     emberjscomimagesteamtdalejpg: true
@@ -87,7 +85,7 @@ test('it leverages cache', function(assert) {
 test('`width` and `height` bindings work correctly', function(assert) {
   assert.expect(2);
 
-  var component = this.subject({
+  const component = this.subject({
     width: 400,
     height: 400
   });
@@ -101,7 +99,7 @@ test('`width` and `height` bindings work correctly', function(assert) {
 test('`width` and `height` are not used if set to 0 or unset', function(assert) {
   assert.expect(2);
 
-  var component = this.subject({
+  const component = this.subject({
     width: 400
   });
 
@@ -114,7 +112,7 @@ test('`width` and `height` are not used if set to 0 or unset', function(assert) 
 test('`data-*` attribute bindings work correctly', function(assert) {
   assert.expect(1);
 
-  var component = this.subject({
+  const component = this.subject({
     'data-person-id': 1234
   });
 
@@ -126,12 +124,12 @@ test('`data-*` attribute bindings work correctly', function(assert) {
 test('passing class names for the <img> element', function(assert) {
   assert.expect(1);
 
-  var component = this.subject({
+  const component = this.subject({
     class: 'img-responsive image-thumbnail'
   });
 
   this.render();
 
-  var expected = 'lazy-image img-responsive image-thumbnail';
+  const expected = 'lazy-image img-responsive image-thumbnail';
   assert.equal(component.$('img').attr('class'), expected);
 });
