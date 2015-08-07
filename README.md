@@ -72,6 +72,14 @@ You can also pass class names for the image element.
 {{lazy-image url='http://my-valid-url.com/foo.jpg' class='foo-bar baz-bar'}}
 ```
 
+### `alt` attribute
+
+You can pass the alt attribute to the component and it will be rendered on the image element
+
+```hbs
+{{lazy-image url='http://my-valid-url.com/foo.jpg' alt='foo description'}}
+```
+
 ### ember-in-viewport options
 
 Lazy Image uses [ember-in-viewport](https://github.com/dockyard/ember-in-viewport/) for viewport detection. Due to the way listeners and `requestAnimationFrame` is setup, you'll have to override the `ember-in-viewport` options by creating `app/components/lazy-image.js`:
