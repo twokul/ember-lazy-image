@@ -133,3 +133,16 @@ test('passing class names for the <img> element', function(assert) {
   const expected = 'lazy-image img-responsive image-thumbnail';
   assert.equal(component.$('img').attr('class'), expected);
 });
+
+test('passing alt attribute for the <img> element', function(assert) {
+  assert.expect(1);
+
+  const component = this.subject({
+    alt: 'alternate text'
+  });
+
+  this.render();
+
+  const expected = 'alternate text';
+  assert.equal(component.$('img').attr('alt'), expected);
+});

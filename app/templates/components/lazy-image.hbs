@@ -30,8 +30,8 @@
 {{/if}}
 
 {{#if useDimensionsAttrs}}
-  <img class="{{unbound class}}" src={{lazyUrl}} height={{height}} width={{width}} />
+  <img class="{{unbound class}}" src={{lazyUrl}} alt="{{unbound alt}}" height={{height}} width={{width}} />
 {{else}}
-  <img class="{{unbound class}}" src={{lazyUrl}} />
+  <img class="{{unbound class}}" src={{lazyUrl}} alt="{{unbound alt}}"/>
 {{/if}}
 
