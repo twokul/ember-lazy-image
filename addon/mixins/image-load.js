@@ -20,12 +20,12 @@ export default Mixin.create({
     if (!isCached) {
       image.one('load', () => {
         image.off('error');
-        run.schedule('afterRender', component, () => set(component, 'loaded', true));
+        run(run, 'schedule', 'afterRender', component, () => set(component, 'loaded', true));
       });
 
       image.one('error', () => {
         image.off('load');
-        run.schedule('afterRender', component, () => set(component, 'errorThrown', true));
+        run(run, 'schedule', 'afterRender', component, () => set(component, 'errorThrown', true));
       });
     } else {
       run.schedule('afterRender', component, () => set(component, 'loaded', true));
