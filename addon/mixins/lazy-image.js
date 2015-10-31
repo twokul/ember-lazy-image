@@ -5,7 +5,7 @@ const { on, get, set, Mixin, computed, setProperties } = Ember;
 const dasherize = Ember.String.dasherize;
 
 export default Mixin.create({
-  viewportOptionsOveride: on('didInitAttrs', function() {
+  didInsertElement() {
     setProperties(this, {
       viewportScrollSensitivity: 20,
       viewportListeners: [
@@ -14,7 +14,9 @@ export default Mixin.create({
         { context: document, event: 'touchmove.scrollable' }
       ]
     });
-  }),
+
+    this._super(...arguments);
+  },
 
   _cache: Cache.create(),
 
