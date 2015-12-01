@@ -18,10 +18,8 @@ moduleForComponent('lazy-image', 'LazyImageComponent', {
 const { run } = Ember;
 const get = Ember.get;
 
-const imageSelector          = '.lazy-image';
 const placeholderSelector    = '.lazy-image-placeholder';
 const errorMessageSelector   = '.lazy-image-error-message';
-const imageContainerSelector = '.lazy-image-container';
 
 test('it has correct defaults', function(assert) {
   assert.expect(5);
