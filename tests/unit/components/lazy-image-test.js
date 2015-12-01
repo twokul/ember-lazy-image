@@ -44,9 +44,8 @@ test('it renders default placeholder', function(assert) {
 test('it renders default error message if image fails to load', function(assert) {
   assert.expect(2);
 
-  const component = this.subject({
-    errorThrown: true
-  });
+  const component = this.subject();
+  component.set('errorThrown', true);
 
   this.render();
 
