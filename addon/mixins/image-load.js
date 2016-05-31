@@ -1,10 +1,21 @@
+
 import Ember from 'ember';
 
-const { on, set, run, Mixin, computed, getWithDefault } = Ember;
+const {
+  computed,
+  getWithDefault,
+  Mixin,
+  run,
+  set
+} = Ember;
 
 export default Mixin.create({
-  loaded:      false,
-  errorThrown: false,
+  init() {
+    this._super(...arguments);
+    this.loaded = false;
+    this.errorThrown = false;
+    this.listenersNotSet = true;
+  },
 
   classNameBindings: ['loaded', 'errorThrown'],
 
@@ -12,23 +23,34 @@ export default Mixin.create({
     return getWithDefault(this, 'errorText', 'Image failed to load');
   }),
 
-  _resolveImage: on('didRender', function() {
-    const component = this;
-    const image     = component.$('img');
-    const isCached  = image[0].complete;
+  didRender() {
+    this._super(...arguments);
 
-    if (!isCached) {
+    const image = this.$('img');
+    const isCached = image[0].complete;
+
+    if (isCached) {
+      return run.scheduleOnce('afterRender', this, this._safeSet, 'loaded', true);
+    }
+
+    if (this.listenersNotSet) {
       image.one('load', () => {
         image.off('error');
-        run.schedule('afterRender', component, () => set(component, 'loaded', true));
+        run(null, run.scheduleOnce, 'afterRender', this, this._safeSet, 'loaded', true);
       });
 
       image.one('error', () => {
         image.off('load');
-        run.schedule('afterRender', component, () => set(component, 'errorThrown', true));
+        run(null, run.scheduleOnce, 'afterRender', this, this._safeSet, 'errorThrown', true);
       });
-    } else {
-      run.schedule('afterRender', component, () => set(component, 'loaded', true));
+
+      this.listenersNotSet = false;
     }
-  })
+  },
+
+  _safeSet(key, val) {
+    if (!(this.isDestroying || this.isDestroyed)) {
+      set(this, key, val);
+    }
+  }
 });
