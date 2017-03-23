@@ -1,6 +1,6 @@
 .lazy-image-container {
   position: relative;
-  min-height: 200px;
+  height: 100%;
 }
 
 .lazy-image-container img {
@@ -31,9 +31,9 @@
 }
 
 .lazy-image-placeholder {
-  position: absolute;
-  top: 50%;
-  right: 50%;
+  width: 100%;
+  height: 100%;
+  background: #E0E0E0;
 }
 
 .lazy-background-image {

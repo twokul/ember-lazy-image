@@ -26,7 +26,7 @@ export default Mixin.create({
     this._setupAttributes();
   }),
 
-  handleImageUrl: on('didInitAttrs', function() {
+  handleImageUrl: on('init', function() {
     this._setImageUrl();
   }),
 

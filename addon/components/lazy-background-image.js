@@ -18,7 +18,7 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, LazyImageMixin,
 
   classNames: ['lazy-background-image'],
 
-  _setupAttributes() {
+  _setupAttributes() {    
     const component = this;
     const keys = Object.keys || Ember.keys;
 
