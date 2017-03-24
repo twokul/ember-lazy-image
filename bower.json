@@ -1,5 +1,5 @@
 {
-  "name": "ember-lazy-image",
+  "name": "savo-lazy-image",
   "dependencies": {
     "blob-polyfill": "^1.0.20150320"
   }
