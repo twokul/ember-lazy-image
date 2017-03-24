@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: 'savo-lazy-image'
+  name: 'ember-lazy-image'
 };

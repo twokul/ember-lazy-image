@@ -1,11 +1,11 @@
-# savo-lazy-image
+# ember-lazy-image
 
 This README outlines the details of collaborating on this Ember addon.
 
 ## Installation
 
 * `git clone <repository-url>` this repository
-* `cd savo-lazy-image`
+* `cd ember-lazy-image`
 * `npm install`
 * `bower install`
 

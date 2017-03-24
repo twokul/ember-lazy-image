@@ -1,1 +1,1 @@
-export { default } from 'savo-lazy-image/components/lazy-image';
+export { default } from 'ember-lazy-image/components/lazy-image';
