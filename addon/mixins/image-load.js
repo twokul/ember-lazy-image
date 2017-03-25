@@ -20,33 +20,24 @@ export default Mixin.create({
     if (!isCached) {
       image.one('load', () => {
         image.off('error');
-        run(() => {
-          run.schedule('afterRender', component, () => {
-            if (this.isDestroyed) { return; }
-            set(component, 'loaded', true);
-          });
-
-        })
-      });
-
-      image.one('error', () => {
-        image.off('load');
-        run(() => {
-          run.schedule('afterRender', component, () => {
-            if (this.isDestroyed) { return; }
-            set(component, 'errorThrown', true);
-          });
-
-        })
-      });
-    } else {
-      run(() => {
         run.schedule('afterRender', component, () => {
           if (this.isDestroyed) { return; }
           set(component, 'loaded', true);
         });
+      });
 
-      })
+      image.one('error', () => {
+        image.off('load');
+        run.schedule('afterRender', component, () => {
+          if (this.isDestroyed) { return; }
+          set(component, 'errorThrown', true);
+        });
+      });
+    } else {
+      run.schedule('afterRender', component, () => {
+        if (this.isDestroyed) { return; }
+        set(component, 'loaded', true);
+      });
     }
   })
 });
