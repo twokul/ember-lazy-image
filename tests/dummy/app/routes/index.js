@@ -4,37 +4,25 @@ export default Ember.Route.extend({
   model: function() {
     return Ember.A([{
       text: 'Yehuda Katz',
-      url:  'http://emberjs.com/images/team/ykatz.jpg'
+      url:  'https://avatars3.githubusercontent.com/u/4?v=3&s=400'
     }, {
       text: 'Tom Dale',
-      url:  'http://emberjs.com/images/team/tdale.jpg'
+      url:  'https://avatars0.githubusercontent.com/u/90888?v=3&s=400'
     }, {
-      text: 'Peter Wagenet',
-      url:  'http://emberjs.com/images/team/pwagenet.jpg'
-    }, {
-      text: 'Trek Glowacki',
-      url:  'http://emberjs.com/images/team/tglowaki.jpg'
-    }, {
-      text: 'Erik Bryn',
-      url:  'http://emberjs.com/images/team/ebryn.jpg'
-    }, {
-      text: 'Kris Selden',
-      url:  'http://emberjs.com/images/team/kselden.jpg'
-    }, {
-      text: 'Stefan Penner',
-      url:  'http://emberjs.com/images/team/spenner.jpg'
+      text: 'Godfrey Chan',
+      url:  'https://avatars0.githubusercontent.com/u/55829?v=3&s=400'
     }, {
       text: 'Leah Silber',
-      url:  'http://emberjs.com/images/team/lsilber.jpg'
+      url:  'https://avatars2.githubusercontent.com/u/25433?v=3&s=400'
     }, {
-      text: 'Alex Matchneer',
-      url:  'http://emberjs.com/images/team/amatchneer.jpg'
+      text: 'Erik Bryn',
+      url:  'https://avatars0.githubusercontent.com/u/3018?v=3&s=400'
     }, {
-      text: 'Robert Jackson',
-      url:  'http://emberjs.com/images/team/rjackson.jpg'
+      text: 'Kris Selden',
+      url:  'https://avatars0.githubusercontent.com/u/61024?v=3&s=400'
     }, {
-      text: 'Igor Terzic',
-      url:  'http://emberjs.com/images/team/iterzic.jpeg'
+      text: 'Stefan Penner',
+      url:  'https://avatars3.githubusercontent.com/u/1377?v=3&s=400'
     }]);
   }
 });
