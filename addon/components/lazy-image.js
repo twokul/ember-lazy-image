@@ -2,10 +2,13 @@ import Ember           from 'ember';
 import ImageLoadMixin  from '../mixins/image-load';
 import LazyImageMixin  from '../mixins/lazy-image';
 import InViewportMixin from 'ember-in-viewport';
+import layout from '../templates/components/lazy-image';
 
 const { on, get, set, computed, Component } = Ember;
 
 export default Component.extend(InViewportMixin, ImageLoadMixin, LazyImageMixin, {
+  layout,
+
   classNames: ['lazy-image-container'],
 
   concatenatedProperties: ['class'],
