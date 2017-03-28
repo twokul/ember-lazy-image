@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { on, set, run, Mixin, computed, getWithDefault } = Ember;
+const { set, run, Mixin, computed, getWithDefault } = Ember;
 
 export default Mixin.create({
   loaded:      false,
@@ -12,7 +12,10 @@ export default Mixin.create({
     return getWithDefault(this, 'errorText', 'Image failed to load');
   }),
 
-  _resolveImage: on('didRender', function() {
+  didRender() {
+    this._super(...arguments);
+    if (this.isDestroyed) { return; }
+
     const component = this;
     const image     = component.$('img');
     const isCached  = image[0].complete;
@@ -39,5 +42,5 @@ export default Mixin.create({
         set(component, 'loaded', true);
       });
     }
-  })
+  }
 });
