@@ -17,7 +17,7 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, LazyImageMixin,
     set(this, 'class', classArray.join(' '));
   }),
 
-  _setupAttributes() {
+  _setupAttributes() {    
     const img       = this.$('img');
     const component = this;
     const keys = Object.keys || Ember.keys;
