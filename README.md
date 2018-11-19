@@ -116,24 +116,32 @@ The use of `threshold` is deprecated in favor of `viewportTolerance`.
 This is an experimental component that will add `background-image` style attribute to a component's `div`. It also
 sets `min-height` attribute to `270px` so the image is visible. You should be able to overwrite it by using `lazy-background-image` class.
 
-## Installation
+### Installation
 
-* `git clone` this repository
+* `git clone <repository-url>`
+* `cd my-addon`
 * `npm install`
-* `bower install`
 
-## Running
+### Linting
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+* `npm run lint:hbs`
+* `npm run lint:js`
+* `npm run lint:js -- --fix`
 
-## Running Tests
+### Running tests
 
-* `ember test`
-* `ember test --server`
+* `ember test` – Runs the test suite on the current Ember version
+* `ember test --server` – Runs the test suite in "watch mode"
+* `ember try:each` – Runs the test suite against multiple Ember versions
 
-## Building
+### Running the dummy application
 
-* `ember build`
+* `ember serve`
+* Visit the dummy application at [http://localhost:4200](http://localhost:4200).
 
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+
+License
+------------------------------------------------------------------------------
+
+This project is licensed under the [MIT License](LICENSE.md).
