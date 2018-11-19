@@ -1,8 +1,7 @@
-import Ember from 'ember';
-import Cache from '../lib/cache';
-
-const { on, get, set, Mixin, computed, setProperties } = Ember;
-const dasherize = Ember.String.dasherize;
+import { storageFor } from 'ember-local-storage';
+import Mixin from '@ember/object/mixin';
+import { dasherize } from '@ember/string';
+import { get, set, computed, setProperties } from '@ember/object';
 
 export default Mixin.create({
   didInsertElement() {
@@ -18,19 +17,23 @@ export default Mixin.create({
     this._super(...arguments);
   },
 
-  _cache: Cache.create(),
+  _cache: storageFor('lazy-image'),
 
   lazyUrl: null,
 
-  handleDidRender: on('didRender', function() {
+  didRender() {
+    this._super(...arguments);
     this._setupAttributes();
-  }),
+  },
 
-  handleImageUrl: on('didInitAttrs', function() {
+  didInitAttrs() {
+    this._super(...arguments);
     this._setImageUrl();
-  }),
+  },
 
-  _setImageUrl: on('didEnterViewport', function() {
+  didEnterViewport() {
+    this._super(...arguments);
+
     const url             = get(this, 'url');
     const cache           = get(this, '_cache');
     const lazyUrl         = get(this, 'lazyUrl');
@@ -48,13 +51,14 @@ export default Mixin.create({
         set(cache, cacheKey, true);
       }
     }
-  }),
+  },
 
   _cacheKey: computed('url', function() {
     var url = this.get('url');
     var key;
 
     if (url) {
+      // eslint-disable-next-line
       key = dasherize(url.replace(/^http[s]?\:\/\/|\.|\//g, ''));
     }
 
