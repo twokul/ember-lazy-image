@@ -17,6 +17,7 @@
   "scripts": {
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
+    "lint:fix": "eslint . --fix",
     "start": "ember serve",
     "test": "ember test",
     "build": "ember build",
@@ -25,7 +26,7 @@
   "dependencies": {
     "ember-cli-babel": "^6.16.0",
     "ember-in-viewport": "^2.0.4",
-    "ember-local-storage": "0.0.5"
+    "ember-local-storage": "1.5.0"
   },
   "devDependencies": {
     "@ember/optional-features": "^0.6.3",

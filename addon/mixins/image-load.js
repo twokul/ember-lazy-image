@@ -1,6 +1,6 @@
-import Ember from 'ember';
-
-const { on, set, run, Mixin, computed, getWithDefault } = Ember;
+import { run } from '@ember/runloop';
+import Mixin from '@ember/object/mixin';
+import { set, computed, getWithDefault } from '@ember/object';
 
 export default Mixin.create({
   loaded:      false,
@@ -12,23 +12,25 @@ export default Mixin.create({
     return getWithDefault(this, 'errorText', 'Image failed to load');
   }),
 
-  _resolveImage: on('didRender', function() {
+  didRender() {
+    this._super(...arguments);
+
     const component = this;
-    const image     = component.$('img');
-    const isCached  = image[0].complete;
+    const image = this.element.querySelector('img');
+    const isCached  = image.complete;
 
     if (!isCached) {
-      image.one('load', () => {
-        image.off('error');
+      image.addEventListener('load', () => {
+        image.removeEventListener('error');
         run.schedule('afterRender', component, () => set(component, 'loaded', true));
       });
 
-      image.one('error', () => {
-        image.off('load');
+      image.addEventListener('error', () => {
+        image.removeEventListener('load');
         run.schedule('afterRender', component, () => set(component, 'errorThrown', true));
       });
     } else {
       run.schedule('afterRender', component, () => set(component, 'loaded', true));
     }
-  })
+  }
 });
