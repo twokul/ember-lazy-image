@@ -35,9 +35,9 @@
     "phantomjs": "^1.9.18"
   },
   "dependencies": {
-    "ember-cli-babel": "^5.0.0",
+    "ember-cli-babel": "^6.0.0",
     "ember-in-viewport": "^2.0.4",
-    "ember-local-storage": "0.0.5"
+    "ember-local-storage": "^1.0.0"
   },
   "keywords": [
     "ember-addon",
