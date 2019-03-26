@@ -1,8 +1,9 @@
-import Ember from "ember";
+import { A } from '@ember/array';
+import Route from '@ember/routing/route';
 
-export default Ember.Route.extend({
+export default Route.extend({
   model: function() {
-    return Ember.A([{
+    return A([{
       text: 'Yehuda Katz',
       url:  'http://emberjs.com/images/team/ykatz.jpg'
     }, {
