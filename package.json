@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "ember-cli-babel": "^7.1.2",
-    "ember-in-viewport": "^2.0.4",
+    "ember-in-viewport": "3.3.0",
     "ember-local-storage": "^1.0.0"
   },
   "devDependencies": {
