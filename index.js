@@ -1,8 +1,7 @@
-/* jshint node: true */
 'use strict';
 
 module.exports = {
-  name: 'ember-lazy-image',
+  name: require('./package').name,
 
   included: function emberLazyImageIncluded(app) {
     this._super.included(app);
