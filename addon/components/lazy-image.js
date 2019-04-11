@@ -17,6 +17,7 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, LazyImageMixin,
     this._super(...arguments);
     const classArray = get(this, 'class');
     set(this, 'class', classArray.join(' '));
+    set(this, 'viewportSpy', true);
   },
 
   _setupAttributes() {
