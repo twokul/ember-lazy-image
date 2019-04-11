@@ -15,19 +15,19 @@ export default Mixin.create({
 
   _resolveImage: on('didRender', function() {
     const component = this;
-    const image     = component.$('img');
-    const isCached  = image[0].complete;
+    const image     = component.element.getElementsByTagName('img')[0];
+    const isCached  = image.complete;
 
     if (!isCached) {
-      image.one('load', () => {
-        image.off('error');
+      image.onload = () => {
+        image.onerror = null;
         run.schedule('afterRender', component, () => set(component, 'loaded', true));
-      });
+      };
 
-      image.one('error', () => {
-        image.off('load');
+      image.onerror = () => {
+        image.onload = null;
         run.schedule('afterRender', component, () => set(component, 'errorThrown', true));
-      });
+      };
     } else {
       run.schedule('afterRender', component, () => set(component, 'loaded', true));
     }

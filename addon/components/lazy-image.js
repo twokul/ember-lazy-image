@@ -13,14 +13,15 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, LazyImageMixin,
 
   class: ['lazy-image'],
 
-  _classJoin: on('init', function() {
+  init() {
+    this._super(...arguments);
     const classArray = get(this, 'class');
     set(this, 'class', classArray.join(' '));
-  }),
+  },
 
   _setupAttributes() {
-    const img       = this.$('img');
     const component = this;
+    const img = component.element.getElementsByTagName('img')[0];
     const keys = Object.keys || keys;
 
     keys(component).forEach((key) => {
