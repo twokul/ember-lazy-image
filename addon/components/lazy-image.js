@@ -1,18 +1,18 @@
-import { computed, set, get } from '@ember/object';
+import { computed, set } from '@ember/object';
 import Component from '@ember/component';
 import ImageLoadMixin  from '../mixins/image-load';
 import LazyImageMixin  from '../mixins/lazy-image';
 import InViewportMixin from 'ember-in-viewport';
 
 export default Component.extend(InViewportMixin, ImageLoadMixin, LazyImageMixin, {
-  classNames: ['lazy-image-container'],
+  classNames: ['lazy-image-container', 'lazy-image'],
 
   concatenatedProperties: ['class'],
 
   init() {
     this._super(...arguments);
-    const classArray = get(this, 'class');
-    set(this, 'class', classArray.join(' '));
+    // const classArray = get(this, 'class');
+    // set(this, 'class', classArray.join(' '));
     set(this, 'viewportSpy', true);
   },
 

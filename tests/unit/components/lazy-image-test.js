@@ -13,10 +13,10 @@ module('LazyImageComponent', function(hooks) {
     window.sessionStorage.clear();
   });
 
-  const imageSelector          = '.lazy-image';
+  //const imageSelector          = '.lazy-image';
   const placeholderSelector    = '.lazy-image-placeholder';
   const errorMessageSelector   = '.lazy-image-error-message';
-  const imageContainerSelector = '.lazy-image-container';
+  //const imageContainerSelector = '.lazy-image-container';
 
   test('it has correct defaults', function(assert) {
     assert.expect(5);
