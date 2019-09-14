@@ -1,4 +1,3 @@
-import { keys } from '@ember/polyfills';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import { htmlSafe } from '@ember/template';
@@ -20,7 +19,7 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, LazyImageMixin,
 
   _setupAttributes() {
     const component = this;
-    const keys = Object.keys || keys;
+    const keys = Object.keys;
 
     keys(component).forEach((key) => {
       if (key.substr(0, 5) === 'data-' && !key.match(/Binding$/)) {

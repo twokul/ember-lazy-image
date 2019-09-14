@@ -1,5 +1,3 @@
-import { keys } from '@ember/polyfills';
-import { on } from '@ember/object/evented';
 import { computed, set, get } from '@ember/object';
 import Component from '@ember/component';
 import ImageLoadMixin  from '../mixins/image-load';
@@ -11,8 +9,6 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, LazyImageMixin,
 
   concatenatedProperties: ['class'],
 
-  class: ['lazy-image'],
-
   init() {
     this._super(...arguments);
     const classArray = get(this, 'class');
@@ -23,7 +19,7 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, LazyImageMixin,
   _setupAttributes() {
     const component = this;
     const img = component.element.getElementsByTagName('img')[0];
-    const keys = Object.keys || keys;
+    const keys = Object.keys;
 
     keys(component).forEach((key) => {
       if (key.substr(0, 5) === 'data-' && !key.match(/Binding$/)) {

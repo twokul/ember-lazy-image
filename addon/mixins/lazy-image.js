@@ -55,7 +55,7 @@ export default Mixin.create({
     var key;
 
     if (url) {
-      key = dasherize(url.replace(/^http[s]?\:\/\/|\.|\//g, ''));
+      key = dasherize(url.replace(/^http[s]?:\/\/|\.|\//g, ''));
     }
 
     if (key) {
