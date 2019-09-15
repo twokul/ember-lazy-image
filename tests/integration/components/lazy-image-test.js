@@ -1,14 +1,10 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, waitFor } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | lazy-image', function(hooks) {
   setupRenderingTest(hooks);
-
-  hooks.beforeEach(function() {
-    window.sessionStorage.clear();
-  });
 
   test('it renders', async function(assert) {
     // Set any properties with this.set('myProperty', 'value');
@@ -52,9 +48,12 @@ module('Integration | Component | lazy-image', function(hooks) {
   });
 
   test('it leverages cache', async function(assert) {
+    window.sessionStorage.clear();
     this.set('url', "https://via.placeholder.com/150");
 
-    await render(hbs`{{lazy-image url=this.url}}`);
+    await render(hbs`{{lazy-image url=this.url class='cached'}}`);
+
+    await waitFor('img.cached');
 
     let lazyImages = window.sessionStorage['storage:cache'];
     let cache = lazyImages ? JSON.parse(lazyImages) : lazyImages;
