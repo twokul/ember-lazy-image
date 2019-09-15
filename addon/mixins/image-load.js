@@ -13,23 +13,23 @@ export default Mixin.create({
     return getWithDefault(this, 'errorText', 'Image failed to load');
   }),
 
-  // _resolveImage: on('didRender', function() {
-  //   const component = this;
-  //   const image     = component.element.getElementsByTagName('img')[0];
-  //   const isCached  = image.complete;
-  //
-  //   if (!isCached) {
-  //     image.onload = () => {
-  //       image.onerror = null;
-  //       run.schedule('afterRender', component, () => set(component, 'loaded', true));
-  //     };
-  //
-  //     image.onerror = () => {
-  //       image.onload = null;
-  //       run.schedule('afterRender', component, () => set(component, 'errorThrown', true));
-  //     };
-  //   } else {
-  //     run.schedule('afterRender', component, () => set(component, 'loaded', true));
-  //   }
-  // })
+  _resolveImage: on('didRender', function() {
+    const component = this;
+    const image     = component.element.getElementsByTagName('img')[0];
+    const isCached  = image.complete;
+
+    if (!isCached) {
+      image.onload = () => {
+        image.onerror = null;
+        run.schedule('afterRender', component, () => set(component, 'loaded', true));
+      };
+
+      image.onerror = () => {
+        image.onload = null;
+        run.schedule('afterRender', component, () => set(component, 'errorThrown', true));
+      };
+    } else {
+      run.schedule('afterRender', component, () => set(component, 'loaded', true));
+    }
+  })
 });

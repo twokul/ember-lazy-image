@@ -2,7 +2,7 @@ import { dasherize } from '@ember/string';
 import { on } from '@ember/object/evented';
 import Mixin from '@ember/object/mixin';
 import { setProperties, computed, set, get } from '@ember/object';
-import Cache from '../lib/cache';
+import { storageFor } from 'ember-local-storage';
 
 export default Mixin.create({
   didInsertElement() {
@@ -18,7 +18,7 @@ export default Mixin.create({
     this._super(...arguments);
   },
 
-  _cache: Cache.create(),
+  _cache: storageFor('cache'),
 
   lazyUrl: null,
 

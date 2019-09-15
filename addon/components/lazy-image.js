@@ -3,16 +3,14 @@ import Component from '@ember/component';
 import ImageLoadMixin  from '../mixins/image-load';
 import LazyImageMixin  from '../mixins/lazy-image';
 import InViewportMixin from 'ember-in-viewport';
+import layout from '../templates/components/lazy-image';
 
 export default Component.extend(InViewportMixin, ImageLoadMixin, LazyImageMixin, {
+  layout,
   classNames: ['lazy-image-container', 'lazy-image'],
-
-  concatenatedProperties: ['class'],
 
   init() {
     this._super(...arguments);
-    // const classArray = get(this, 'class');
-    // set(this, 'class', classArray.join(' '));
     set(this, 'viewportSpy', true);
   },
 
@@ -23,7 +21,7 @@ export default Component.extend(InViewportMixin, ImageLoadMixin, LazyImageMixin,
 
     keys(component).forEach((key) => {
       if (key.substr(0, 5) === 'data-' && !key.match(/Binding$/)) {
-        img.attr(key, component.get(key));
+        img.setAttribute(key, component.get(key));
       }
     });
   },
