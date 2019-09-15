@@ -1,30 +1,29 @@
-import Ember           from 'ember';
+import { computed, set } from '@ember/object';
+import Component from '@ember/component';
 import ImageLoadMixin  from '../mixins/image-load';
 import LazyImageMixin  from '../mixins/lazy-image';
 import InViewportMixin from 'ember-in-viewport';
-
-const { on, get, set, computed, Component } = Ember;
+import layout from '../templates/components/lazy-image';
 
 export default Component.extend(InViewportMixin, ImageLoadMixin, LazyImageMixin, {
-  classNames: ['lazy-image-container'],
+  layout,
+  classNames: ['lazy-image-container', 'lazy-image'],
 
-  concatenatedProperties: ['class'],
-
-  class: ['lazy-image'],
-
-  _classJoin: on('init', function() {
-    const classArray = get(this, 'class');
-    set(this, 'class', classArray.join(' '));
-  }),
+  init() {
+    this._super(...arguments);
+    set(this, 'viewportSpy', true);
+    const classes = `${this.get('classNames').join(' ')} ${this.get('class')}`;
+    this.set('classesforImgTag', classes);
+  },
 
   _setupAttributes() {
-    const img       = this.$('img');
     const component = this;
-    const keys = Object.keys || Ember.keys;
+    const img = component.element.getElementsByTagName('img')[0];
+    const keys = Object.keys;
 
     keys(component).forEach((key) => {
       if (key.substr(0, 5) === 'data-' && !key.match(/Binding$/)) {
-        img.attr(key, component.get(key));
+        img.setAttribute(key, component.get(key));
       }
     });
   },
